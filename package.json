@@ -1,0 +1,38 @@
+{
+  "name": "vitepress-theme-kalisio",
+  "version": "0.1.0",
+  "description": "VitePress theme for Kalisio projects",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalisio/vitepress-theme-kalisio.git"
+  },
+  "type": "module",
+  "main": "index",
+  "keywords": [
+    "vue",
+    "vite",
+    "vitepress",
+    "theme",
+    "kalisio"
+  ],
+  "author": "Kalisio team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kalisio/vitepress-theme-kalisio/issues"
+  },
+  "homepage": "https://github.com/kalisio/vitepress-theme-kalisio#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release:major": "npm version --force major",
+    "release:minor": "npm version --force minor",
+    "release:patch": "npm version --force patch"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "quasar": "^2.12.7"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.14"
+  }
+}
