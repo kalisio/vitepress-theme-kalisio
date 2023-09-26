@@ -7,7 +7,7 @@
 
 <script setup>
 import _ from 'lodash'
-import moment from 'momnet'
+import moment from 'moment'
 import { ref } from 'vue'
 
 // Props
