@@ -27,12 +27,12 @@
     "release:minor": "npm version --force minor",
     "release:patch": "npm version --force patch"
   },
-  "dependencies": {
-    "lodash": "^4.17.21",
-    "moment": "^2.29.4",
-    "quasar": "^2.12.7"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "vitepress": "^1.0.0-rc.14"
+    "keycloak-js": "^23.0.5",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "quasar": "^2.14.3",
+    "vitepress": "^1.0.0-rc.40"
   }
 }
