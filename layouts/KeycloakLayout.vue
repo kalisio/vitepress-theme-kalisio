@@ -7,11 +7,6 @@
             <Content />
           </Layout>
         </div>
-        <div v-else>
-          <q-card class="full-width row justify-center">
-            Vous n'etes pas autorisé à accéder à ce site !
-          </q-card>
-        </div>
       </div>
     </div>
     <Layout v-else>
@@ -25,11 +20,13 @@ import _ from 'lodash'
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { ref, onMounted } from 'vue'
+import { useQuasar } from 'quasar'
 import Keycloak from 'keycloak-js'
 
 // Data
 const { theme } = useData()
 const { Layout } = DefaultTheme
+const $q = useQuasar()
 const useKeycloak = ref(theme.value.useKeycloak === 'true')
 const isAuthenticated = ref(false)
 const hasAccess = ref(false)
@@ -47,6 +44,12 @@ onMounted(() => {
         else {
           const userRoles = _.get(keycloak, 'realmAccess.roles', [])
           if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) hasAccess.value = true
+          else $q.dialog({
+            title: 'Accés refusé',
+            message: 'Vous n\'êtes pas autorisé à accèder à ce site'
+          }).onOk(() => {
+            window.location.href=theme.value.keycloak.fallbackUrl
+          })
         }
       } else {
         window.location.reload()
