@@ -514,11 +514,6 @@ algoliasearch@^4.19.1:
     "@algolia/requester-node-http" "4.22.1"
     "@algolia/transporter" "4.22.1"
 
-base64-js@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
-  integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
-
 csstype@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
@@ -575,34 +570,10 @@ fsevents@~2.3.2, fsevents@~2.3.3:
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
-js-sha256@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.10.1.tgz#b40104ba1368e823fdd5f41b66b104b15a0da60d"
-  integrity sha512-5obBtsz9301ULlsgggLg542s/jqtddfOpV5KJc4hajc9JV8GeY2gZHSVpYBn4nWqAUTJ9v+xwtbJ1mIBgIH5Vw==
-
-jwt-decode@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-4.0.0.tgz#2270352425fd413785b2faf11f6e755c5151bd4b"
-  integrity sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==
-
-keycloak-js@^23.0.5:
-  version "23.0.5"
-  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-23.0.5.tgz#b4e81bcbd0d81be2f733bd07c8ec54e77668e912"
-  integrity sha512-etSFCG/sh1rBV8RJRgKsuVBJwtzeZaO5eI8B3ZIhxGwQLo9bObZHYDgthvMik35sYIbepV1LU9N0pZ+3sxai3w==
-  dependencies:
-    base64-js "^1.5.1"
-    js-sha256 "^0.10.1"
-    jwt-decode "^4.0.0"
-
-lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
 magic-string@^0.30.5:
-  version "0.30.5"
-  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.5.tgz#1994d980bd1c8835dc6e78db7cbd4ae4f24746f9"
-  integrity sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==
+  version "0.30.6"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.6.tgz#996e21b42f944e45591a68f0905d6a740a12506c"
+  integrity sha512-n62qCLbPjNjyo+owKtveQxZFZTBm+Ms6YoGD23Wew6Vw337PElFNifQpknPruVRQV57kVShPnLGo9vWxVhpPvA==
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
 
@@ -615,11 +586,6 @@ minisearch@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/minisearch/-/minisearch-6.3.0.tgz#985a2f1ca3c73c2d65af94f0616bfe57164b0b6b"
   integrity sha512-ihFnidEeU8iXzcVHy74dhkxh/dn8Dc08ERl0xwoMMGqp4+LvRSCgicb+zGqWthVokQKvCSxITlh3P08OzdTYCQ==
-
-moment@^2.30.1:
-  version "2.30.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
-  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
 nanoid@^3.3.7:
   version "3.3.7"
@@ -645,11 +611,6 @@ preact@^10.0.0:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.19.3.tgz#7a7107ed2598a60676c943709ea3efb8aaafa899"
   integrity sha512-nHHTeFVBTHRGxJXKkKu5hT8C/YWBkPso4/Gad6xuj5dbptt9iF9NZr9pHbPhBrnT2klheu7mHTxTZ/LjwJiEiQ==
 
-quasar@^2.14.3:
-  version "2.14.3"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.14.3.tgz#0956f6bcdc9ce5a76728e1d7b235e9ce963f1d89"
-  integrity sha512-7WzbtZxykLn2ic5oNpepZ2ZjDVpmxyVD4KC9rWe+Ia+4Er61svGr4jOuttN+Ok7IerLSCmKIRyjQMgasF60rFA==
-
 rollup@^4.2.0:
   version "4.9.6"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-4.9.6.tgz#4515facb0318ecca254a2ee1315e22e09efc50a0"
@@ -671,11 +632,6 @@ rollup@^4.2.0:
     "@rollup/rollup-win32-ia32-msvc" "4.9.6"
     "@rollup/rollup-win32-x64-msvc" "4.9.6"
     fsevents "~2.3.2"
-
-saas@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/saas/-/saas-1.0.0.tgz#0091274f26664300bbca5e9893bc4bb88709e677"
-  integrity sha512-FgayhFS18BlPfcyMcOqxD7PIyNyUjqyv8R+rsr3X2KRK2icEUL4uvWBF+lZ0IPqJIO2kUO0d20OXY+R+pdriqg==
 
 shikiji-core@0.10.2, shikiji-core@^0.10.0:
   version "0.10.2"
