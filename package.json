@@ -7,7 +7,6 @@
     "url": "git+https://github.com/kalisio/vitepress-theme-kalisio.git"
   },
   "type": "module",
-  "main": "index",
   "keywords": [
     "vue",
     "vite",
