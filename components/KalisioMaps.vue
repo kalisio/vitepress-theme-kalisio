@@ -31,7 +31,7 @@ onMounted(() => {
     postRobotScript.onload = () => {
       postRobot.on('maps-ready', () => {
         if (props.token !== '') {
-          postRobot.send(maps, 'setLocalStorage', { 'maps-jwt': props.token })
+          postRobot.send(maps, 'setLocalStorage', { 'kano-jwt': props.token })
         }
       })
     }
