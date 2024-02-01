@@ -4,8 +4,10 @@
 
 ## Features
 
-This theme is shipped with:
-* [Quasar framework](https://quasar.dev/)
+This theme provide you with:
+* the capability to secure the access to the site using [Keycloak](https://www.keycloak.org/)
+* the ease to define custom components using [Quasar framework](https://quasar.dev/)
+* a set of ready to use components
 
 ## Getting started
 
@@ -46,3 +48,20 @@ vite: {
 }
 ```
 
+## Components
+
+### HomeFooter
+
+This component provides a footer for the home page. You can customize the content using a specifc section ont `config.js`:
+
+```js
+trustLogos: [
+  { imageLink: '', link: '' }
+]
+```
+
+## KalisioMaps
+
+## TourLink
+
+## TemplateUrl
