@@ -5,6 +5,8 @@
 <script setup>
 import { computed } from 'vue'
 import { useData } from 'vitepress'
+
+// Props
 const props = defineProps({
   text: {
     type: String,
@@ -20,7 +22,8 @@ const props = defineProps({
     default: function () { return {} }
   }
 })
-// computed
+
+// Computed
 const computedUrl = computed(() => {
   let url = useData().theme.value.appUrl + `#/${props.path}?`
   // Add tour param be default if not provided

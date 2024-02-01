@@ -5,6 +5,7 @@
 </template>
 <script setup>
 import { onMounted } from 'vue'
+
 // Props
 const props = defineProps({
   source: {
@@ -20,6 +21,7 @@ const props = defineProps({
     default: 'width: 100%; height: 50vh'
   }
 })
+
 // Hooks
 onMounted(() => {
   const maps = document.getElementById('maps').contentWindow

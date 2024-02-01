@@ -17,8 +17,10 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
 import _ from 'lodash'
+
 // Data
 const { theme, isDark } = useData()
+
 // computed
 const computedLogo = computed(() => {
   if (isDark.value) return 'https://s3.eu-central-1.amazonaws.com/kalisioscope/kalisio/kalisio-logo-white-256x84.png'
