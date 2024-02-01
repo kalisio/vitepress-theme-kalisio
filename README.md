@@ -23,14 +23,26 @@ To install the theme using a specific branch:
 yarn add -D https://github.com/kalisio/vitepress-theme-kalisio#<branch>
 ```
 
-### Consuming the theme
+### Using the theme
 
-To consume the theme, import and re-export it from the custom theme entry:
+To use the theme, import and re-export it from the custom theme entry:
 
 ```js
 // .vitepress/theme/index.js
-import Theme from 'awesome-vitepress-theme'
-
+import Theme from 'vitepress-theme-kalisio'
 export default Theme
+```
+
+And provide some specific configuration to allow the build. Add the following **vite** configuration:
+
+```js
+vite: {
+  optimizeDeps: {
+    include: ['keycloak-js', 'lodash'],
+  },
+  ssr: {
+    noExternal: ['vitepress-theme-kalisio'],
+  }
+}
 ```
 
