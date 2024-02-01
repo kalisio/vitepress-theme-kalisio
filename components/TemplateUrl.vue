@@ -9,6 +9,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import { ref } from 'vue'
+import { useData } from 'vitepress'
 
 // Props
 const props = defineProps({
@@ -27,11 +28,12 @@ const props = defineProps({
 })
 
 // Data
+const { theme } = useData()
 const url = ref('')
 
 // Immediate
 const compiler = _.template(props.urlTemplate)
 let context = { moment }
-context.jwt = this.$site.themeConfig.jwt // Add any access token
+context.jwt = theme.jwt // Add any access token
 url.value = compiler(context)
 </script>
