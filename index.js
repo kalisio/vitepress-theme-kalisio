@@ -11,7 +11,12 @@ export default {
     // Use Quasar framework
     app.use(Quasar, { plugins: { Dialog } }, { req: { headers: {} } })
     // Dynamic registration of all components
-    const modules = await import.meta.glob(['./components/*.vue'])
-    for (const path in modules) modules[path]().then((module) => app.component(module.default.__name, module.default))
+    const modules = import.meta.glob(['./components/*.vue'])
+    for (const path in modules) {
+      // Load the module
+      const module = await modules[path]()
+      // Register the module
+      app.component(module.default.__name, module.default)
+    }
   }
 }
