@@ -6,6 +6,8 @@
 </template>
 
 <script setup>
+import _ from 'lodash'
+import moment from 'moment'
 import { ref, onMounted } from 'vue'
 import { useData } from 'vitepress'
 
@@ -13,15 +15,19 @@ import { useData } from 'vitepress'
 const props = defineProps({
   text: {
     type: String,
-    default: ''
+    required: true
   },
   urlTemplate: {
     type: String,
     required: true
   },
-  jwt: {
-    type: Boolean,
-    default: true
+  domainPath: {
+    type: String,
+    default: 'domain'
+  },
+  jwtPath: {
+    type: String,
+    default: 'jwt'
   }
 })
 
@@ -31,12 +37,10 @@ const url = ref('')
 
 // Hooks
 onMounted(async () => {
-  const _ = await import('lodash')
-  const moment = await import('moment')
   const compiler = _.template(props.urlTemplate)
-  const context = { moment: moment.default }
-  context.domain = theme.value.domain
-  context.jwt = theme.value.jwt
+  const context = { moment }
+  context.domain = _.get(theme.value, props.domainPath)
+  context.jwt = _.get(theme.value, props.jwtPath)
   url.value = compiler(context)
 })
 </script>

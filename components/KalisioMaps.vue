@@ -5,6 +5,7 @@
 </template>
 <script setup>
 import { onMounted } from 'vue'
+import { useData } from 'vitepress'
 
 // Props
 const props = defineProps({
@@ -12,15 +13,14 @@ const props = defineProps({
     type: String,
     default: 'https://kano.dev.kalisio.xyz'
   },
-  token: {
-    type: String,
-    default: ''
-  },
   cssStyle: {
     type: String,
     default: 'width: 100%; height: 50vh'
   }
 })
+
+// Data
+const { theme } = useData()
 
 // Hooks
 onMounted(() => {
@@ -31,7 +31,7 @@ onMounted(() => {
     postRobotScript.onload = () => {
       postRobot.on('maps-ready', () => {
         if (props.token !== '') {
-          postRobot.send(maps, 'setLocalStorage', { 'kano-jwt': props.token })
+          postRobot.send(maps, 'setLocalStorage', { 'kano-jwt': theme.value.jwt })
         }
       })
     }

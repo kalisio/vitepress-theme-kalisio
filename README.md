@@ -52,16 +52,63 @@ vite: {
 
 ### HomeFooter
 
-This component provides a footer for the home page. You can customize the content using a specifc section ont `config.js`:
+#### Description
+
+This component renders a footer for the home page.
+
+#### Configuration
+
+Within the `ThemeConfig` section:
 
 ```js
 trustLogos: [
   { imageLink: '', link: '' }
 ]
 ```
+### KalisioMaps
 
-## KalisioMaps
+#### Description
 
-## TourLink
+This component renders an instance of **Kano** wihtin an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+
+#### Configuration
+
+Within the `ThemeConfig` section:
+
+```js
+maps: [
+  jwt: 'XXXXXXXXXXXXXXX'   // the token to get automatically connected
+]
+```
 
 ## TemplateUrl
+
+#### Description
+
+This component allows to interpolate an Url according a context that includes:
+* a **domain**: if you like to query an API depending on the flavor
+* a **time**: if you like to query an API at a specific time
+* a **jwt** : if you like to query an API that requires authentication
+
+### Props
+
+| Name | Description | Default |
+|---|---|---|
+| `text` | text to display | Required |
+| `template-url` | the url to be interpolated | Required |
+| `domainPath`| the path to extract the **domain** value in the `ThemeConfig` section | `jwt`|
+| `jwtPath`| the path to extract the **jwt** value in the `ThemeConfig` section | `domain`|
+
+### Configuration
+
+Within the `ThemeConfig` section.
+
+```js
+  domain: 'xxxx.yyyyy.xyz'  // the domain to use when interpolating the url
+  jwt: 'XXXXXXXXX'   // the token to use if authentication is required
+```
+
+> ![IMPORTANT]
+> Set the `domainPath` and `jwtPath` if you declare the keys `domain` and `jwt` in a different section
+
+### TourLink
