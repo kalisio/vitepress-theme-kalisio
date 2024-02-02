@@ -1,5 +1,5 @@
 <template>
-  <a :href="url" target="_blank">
+  <a :href="href" target="_blank">
     {{ text }}
     <i class="las la-external-link-square-alt"></i>
   </a>
@@ -15,7 +15,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  link: {
+  hrefTemplate: {
     type: String,
     required: true
   },
@@ -31,16 +31,16 @@ const props = defineProps({
 
 // Data
 const { theme } = useData()
-const url = ref('')
+const href = ref('')
 
 // Hooks
 onMounted(async () => {
   const _ = await import('lodash')
   const moment = await import('moment')
-  const compiler = _.template(props.link)
+  const compiler = _.template(props.hrefTemplate)
   const context = { moment: moment.default }
   context.domain = _.get(theme.value, props.domainPath)
   context.jwt = _.get(theme.value, props.jwtPath)
-  url.value = compiler(context)
+  href.value = compiler(context)
 })
 </script>

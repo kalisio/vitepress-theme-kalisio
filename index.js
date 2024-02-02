@@ -4,7 +4,6 @@ import { Quasar, Dialog } from 'quasar'
 import KeycloakLayout from './layouts/KeycloakLayout.vue'
 import HomeFooter from './components/HomeFooter.vue'
 import KalisioMaps from './components/KalisioMaps.vue'
-import TemplateUrl from './components/TemplateUrl.vue'
 import TemplateAnchor from './components/TemplateAnchor.vue'
 import TourLink from './components/TourLink.vue'
 import './custom.css'
@@ -18,7 +17,6 @@ export default {
     // Dynamic registration of all components
     app.component('HomeFooter', HomeFooter)
     app.component('KalisioMaps', KalisioMaps)
-    app.component('TemplateUrl', TemplateUrl)
     app.component('TemplateAnchor', TemplateAnchor)
     app.component('TourLink', TourLink)
   }
