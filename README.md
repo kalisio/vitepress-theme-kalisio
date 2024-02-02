@@ -74,12 +74,12 @@ useKeycloak: true
 
 **Quasar framework** is shipped with the theme. You can simply create any components and use any features provided by Quasar. 
 
+> [!WARNING]  
+> There is still some work to be done to use SASS Quasar variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
+
 ### Using ready-made components
 
 Here, we offer a comprehensive description of the various components shipped with the theme.
-
-> [!WARNING]  
-> There is still some work to be done to use SASS Quasar variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
 
 #### HomeFooter
 
