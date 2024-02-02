@@ -67,7 +67,7 @@ keycloak: {
 useKeycloak: true
 ```
 
-> ![TIP]
+> [!TIP]
 > During development, it may be convenient to bypass Keycloak authentication. You can achieve this by either commenting out the relevant line or utilizing an environment variable. This allows you to set or unset the variable, eliminating the need to modify the config.js file.
 
 ### Using Quasar framework
