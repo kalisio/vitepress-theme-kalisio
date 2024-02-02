@@ -112,11 +112,11 @@ maps: [
 ]
 ```
 
-#### TemplateUrl
+#### TemplateAnchor
 
 ##### Description
 
-This component allows to interpolate an Url according a context that includes:
+This component allows to interpolate an `href` according a context that includes:
 * a **domain**: if you like to query an API depending on the flavor
 * a **time**: if you like to query an API at a specific time
 * a **jwt** : if you like to query an API that requires authentication
@@ -126,7 +126,7 @@ This component allows to interpolate an Url according a context that includes:
 | Name | Description | Default |
 |---|---|---|
 | `text` | text to display | Required |
-| `template-url` | the url to be interpolated | Required |
+| `hrefTemplate` | the url to be interpolated | Required |
 | `domainPath`| the path to extract the **domain** value in the `ThemeConfig` section | `jwt`|
 | `jwtPath`| the path to extract the **jwt** value in the `ThemeConfig` section | `domain`|
 
