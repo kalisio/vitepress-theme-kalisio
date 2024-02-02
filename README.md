@@ -68,14 +68,14 @@ useKeycloak: true
 ```
 
 > [!TIP]
-> During development, it may be convenient to bypass Keycloak authentication. You can achieve this by either commenting out the relevant line or utilizing an environment variable. This allows you to set or unset the variable, eliminating the need to modify the config.js file.
+> During development, it may be convenient to bypass **Keycloak** authentication. You can achieve this by either commenting out the relevant line or utilizing an environment variable. This allows you to set or unset the variable, eliminating the need to modify the `config.js` file.
 
 ### Using Quasar framework
 
 **Quasar framework** is shipped with the theme. You can simply create any components and use any features provided by Quasar. 
 
 > [!WARNING]  
-> There is still some work to be done to use SASS Quasar variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
+> There is still some work to be done to use SASS **Quasar** variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
 
 ### Using ready-made components
 
