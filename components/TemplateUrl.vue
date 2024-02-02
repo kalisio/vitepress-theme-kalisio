@@ -36,11 +36,13 @@ const { theme } = useData()
 const url = ref('')
 
 // Hooks
-onMounted(async () => {
+onMounted(() => {
   const compiler = _.template(props.urlTemplate)
+  console.log(compiler)
   const context = { moment }
   context.domain = _.get(theme.value, props.domainPath)
   context.jwt = _.get(theme.value, props.jwtPath)
+  console.log(context)
   url.value = compiler(context)
 })
 </script>
