@@ -3,9 +3,9 @@
 > Kalisio VitePress theme
 
 Thie Kaliso VitePress theme provide you with:
-* the capability to secure the access to the site using [Keycloak](https://www.keycloak.org/)
-* the ease to define custom components using [Quasar framework](https://quasar.dev/)
-* a set of ready to use components
+* the ability to secure access to the site using [Keycloak](https://www.keycloak.org/)
+* the ease of defining custom components using [Quasar framework](https://quasar.dev/)
+* a set of ready-made UI components
 
 ## Installing the theme
 
