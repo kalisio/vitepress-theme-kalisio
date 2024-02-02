@@ -1,8 +1,11 @@
 <template>
   <a :href="href" target="_blank">
-    {{ text }}
-    <i class="las la-external-link-square-alt"></i>
+    <div style="overflow-wrap: break-word;">
+      {{ text }}
+      <i class="las la-external-link-square-alt"></i>
+    </div>
   </a>
+
 </template>
 
 <script setup>
