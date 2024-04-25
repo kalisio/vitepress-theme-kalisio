@@ -39,7 +39,7 @@ onMounted(() => {
     let postRobotScript = document.createElement('script')
     postRobotScript.setAttribute('src',"https://cdn.jsdelivr.net/npm/post-robot@10.0.42/dist/post-robot.min.js")
     postRobotScript.onload = () => {
-      postRobot.on('maps-ready', () => {
+      postRobot.on('kano-ready', () => {
         const jwt = _.get(theme.value, 'maps.jwt')
         if (jwt) postRobot.send(maps, 'setLocalStorage', { 'kano-jwt': jwt })
       })
