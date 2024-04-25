@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
+import _ from 'lodash'
 import { ref, onMounted } from 'vue'
 import { useData } from 'vitepress'
 

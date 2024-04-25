@@ -1,9 +1,19 @@
 <template>
   <div>
-    <iframe id="maps" title="Maps" allow="geolocation *" allowfullscreen frameBorder="0" :style="cssStyle" :src="source"></iframe>
+    <iframe 
+      id="maps" 
+      title="Kalisio Maps" 
+      allow="geolocation *" 
+      allowfullscreen 
+      frameBorder="0" 
+      :style="cssStyle" 
+      :src="source">
+    ></iframe>
   </div>
 </template>
+
 <script setup>
+import _ from 'lodash'
 import { onMounted } from 'vue'
 import { useData } from 'vitepress'
 
@@ -30,9 +40,8 @@ onMounted(() => {
     postRobotScript.setAttribute('src',"https://cdn.jsdelivr.net/npm/post-robot@10.0.42/dist/post-robot.min.js")
     postRobotScript.onload = () => {
       postRobot.on('maps-ready', () => {
-        if (props.token !== '') {
-          postRobot.send(maps, 'setLocalStorage', { 'kano-jwt': theme.value.jwt })
-        }
+        const jwt = _.get(theme.value, 'maps.jwt')
+        if (jwt) postRobot.send(maps, 'setLocalStorage', { 'kano-jwt': jwt })
       })
     }
     document.head.appendChild(postRobotScript)
