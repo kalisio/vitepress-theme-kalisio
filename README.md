@@ -96,6 +96,25 @@ trustLogos: [
   { imageLink: '', link: '' }
 ]
 ```
+#### Image
+
+##### Description
+
+This component renders an image that supports the **dark** mode.
+
+##### Props
+
+| Name | Description | Default |
+|---|---|---|
+| `src` | the image to be displayed in normal mode | '' |
+| `darkSrc` | the image to be displayed in dark mode | '' |
+
+#### KalisioLogo
+
+##### Description
+
+This component renders an the **Kalisio** logo that using the `Image` component.
+
 #### KalisioMaps
 
 ##### Description
