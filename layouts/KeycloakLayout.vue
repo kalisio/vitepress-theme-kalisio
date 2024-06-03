@@ -27,14 +27,15 @@ import Keycloak from 'keycloak-js'
 const { theme } = useData()
 const { Layout } = DefaultTheme
 const $q = useQuasar()
-const useKeycloak = ref(theme.value.useKeycloak === 'true')
+const useKeycloak = ref(false)
 const isAuthenticated = ref(false)
 const hasAccess = ref(false)
 
 // Hooks
 onMounted(() => {
-  if (!useKeycloak.value) return
+  if (!(_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) && (theme.value.useKeycloak !== 'true')) return false
   if (theme.value.keycloak) {
+    useKeycloak.value = true
     const keycloak = new Keycloak(theme.value.keycloak)
     keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
       if (auth) {
