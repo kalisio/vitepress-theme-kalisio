@@ -34,6 +34,6 @@
     "quasar": "^2.14.3"
   },
   "peerDependencies": {
-    "vitepress": "^1.0.0-rc.40"
+    "vitepress": "^1.0.2"
   }
 }

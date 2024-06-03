@@ -12,8 +12,21 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     logo: '/kalisio.png',
     nav: [
-      { text: 'About us', link: './about-us.md' }
+      { text: 'Guide', link: 'guide/installation.md' },
+      { text: 'About', link: 'about/motivation.md' }
     ],
+    sidebar: {
+      '/guide/': [
+        { text: 'Installation', link: '/guide/installation' },
+        { text: 'Usage', link: '/guide/usage' }
+      ],
+      '/about/': [
+        { text: 'Motivation', link: '/about/motivation' },
+        { text: 'Contributing', link: '/about/contributing' },
+        { text: 'License', link: '/about/license' },
+        { text: 'Contact', link: '/about/contact' }
+      ]
+    },
     footer: {
       copyright: 'Copyright © 2017-20xx - KALISIO'
     },
