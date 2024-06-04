@@ -49,6 +49,9 @@ trustLogos: [
   { imageLink: '', link: '' }
 ]
 ```
+
+_TODO_
+
 ### Image
 
 This component renders an image that supports the **dark** mode.
