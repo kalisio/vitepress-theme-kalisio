@@ -6,7 +6,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build_docs:
+  build:
     name: Build doc
     runs-on: ubuntu-22.04
     steps:
