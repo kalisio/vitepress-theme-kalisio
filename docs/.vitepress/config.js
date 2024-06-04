@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/',
   title: " ",
   description: "Kalisio Vitepress Theme",
   lastUpdated: true,
