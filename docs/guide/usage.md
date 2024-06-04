@@ -11,7 +11,7 @@ keycloak: {
   url: 'https://keycloak.url',        // Url to the Keycloak instance
   realm: 'keycloak realm',            // Keycloak realm to be used
   clientId: 'site',                   // Keycloak client id assigned to your site
-  roles: ['role1', 'role2', ...]      // Keycloak realm roles required to acceqq the site
+  roles: ['role1', 'role2', ...]      // Keycloak realm roles required to access the site
   fallbackUrl: 'https://kalisio.com'  // Fallback Url if access is denied
 }
 ```
