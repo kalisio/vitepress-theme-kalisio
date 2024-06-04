@@ -1,10 +1,11 @@
 # vitepress-theme-kalisio
 
-> Kalisio VitePress theme
+> _Kalisio VitePress theme_
 
 The full documentation is available [here](https://kalisio.github.io/vitepress-theme-kalisio/)
 
-> The documentation website is generated using [VitePress](https://vitepress.dev/) and with this theme !
+> [!NOTE]  
+> The documentation website is generated using [VitePress](https://vitepress.dev/) and with this theme.
 
 ## License
 
