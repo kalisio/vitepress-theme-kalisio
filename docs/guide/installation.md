@@ -25,7 +25,7 @@ You also need to install the required dev dependencies:
 | **vitepress** | ^1.0.2 |
 
 ::: tip
-Copy the following `devDependencies` in your `package.json`
+You can also copy the following `devDependencies` in your `package.json` and install them:
 ```json
 "devDependencies": {
   "keycloak-js": "^23.0.5",
