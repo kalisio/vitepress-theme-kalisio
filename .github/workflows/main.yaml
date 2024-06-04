@@ -4,7 +4,7 @@ on:
     branches: [ master ]
   workflow_dispatch:
     branches: [ master ]
-    
+
 jobs:
   build_docs:
     name: Build doc
@@ -23,4 +23,20 @@ jobs:
       - name: Build docs
         env:
           SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
-        run: bash ./scripts/build_docs.sh -p -r ${{ github.job }}
+        run: bash ./scripts/build_docs.sh -r ${{ github.job }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs/.vitepress/dist
+
+  deploy:
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      needs: build
+      runs-on: ubuntu-latest
+      name: Deploy
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
