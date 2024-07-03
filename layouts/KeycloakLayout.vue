@@ -25,38 +25,40 @@ function passReferrer () {
   if (!document.referrer) return false
   let subdomains = _.get(theme.value, 'referrer.subdomains', [])
   if (!Array.isArray(subdomains)) subdomains = _.split(subdomains, ',')
+  let result = false
   _.forEach(subdomains, subdomain => {
     if (document.referrer.includes(subdomain)) {
-      hasAccess.value = true
+      result = true
       return false
     }
   })
+  return result
 }
-function passKeycloak () {
-  const keycloak = new Keycloak(theme.value.keycloak)
-  keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
-    if (auth) {
-      const acceptedRoles = _.get(theme.value, 'keycloak.roles', [])
-      if (_.isEmpty(acceptedRoles)) hasAccess.value = true
-      else {
+async function passKeycloak () {
+  return new Promise((resolve, reject) => {
+    const keycloak = new Keycloak(theme.value.keycloak)
+    keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
+      if (auth) {
+        const acceptedRoles = _.get(theme.value, 'keycloak.roles', [])
+        if (_.isEmpty(acceptedRoles)) resolve(true)
         // check roles
         const userRoles = _.get(keycloak, 'realmAccess.roles', [])
-        if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) hasAccess.value = true
+        if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) resolve(true)
+        resolve(false)
+      } else {
+        window.location.reload()
       }
-    } else {
-      window.location.reload()
-    }
+    })
   })
 }
 
 // Hooks
-onMounted(() => {
+onMounted(async () => {
   const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
   const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
-  if (useReferrer) passReferrer()
-  if (!hasAccess.value && useKeycloak) passKeycloak()
+  if (useReferrer) hasAccess.value = passReferrer()
+  if (!hasAccess.value && useKeycloak) hasAccess.value = await passKeycloak()
   if (!hasAccess.value) {
-    // otherwise
     $q.dialog({
       title: 'Accés refusé',
       message: 'Vous n\'êtes pas autorisé à accèder à ce site'
