@@ -63,7 +63,8 @@ onMounted(() => {
   if (!hasAccess.value) {
     console.log('pass keycloak')
     if (useKeycloak) {
-      hasAccess.value = passKeycloak()
+      //hasAccess.value = passKeycloak()
+      hasAccess.value = true
     } else {
       hasAccess.value = !useReferrer
     }
