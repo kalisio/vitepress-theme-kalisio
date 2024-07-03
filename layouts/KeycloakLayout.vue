@@ -1,15 +1,6 @@
 <template>
-  <div>
-    <div v-if="useKeycloak">
-      <div v-if="isAuthenticated">
-        <div v-if="hasAccess">
-          <Layout>
-            <Content />
-          </Layout>
-        </div>
-      </div>
-    </div>
-    <Layout v-else>
+  <div v-if="hasAccess">
+    <Layout>
       <Content />
     </Layout>
   </div>
@@ -27,37 +18,60 @@ import Keycloak from 'keycloak-js'
 const { theme } = useData()
 const { Layout } = DefaultTheme
 const $q = useQuasar()
-const useKeycloak = ref(false)
-const isAuthenticated = ref(false)
 const hasAccess = ref(false)
+
+// Functions
+function passReferrer () {
+  if (!document.referrer) return false
+  let domains = _.get(theme.value, 'referrer.domains', [])
+  if (!Arrays.isArray(domains)) domains = [domains]
+  let hasAccess = false
+  _.forEach(domains, domain => {
+    if (document.referrer.contains(domain)) {
+      hasAccess = true
+      return false
+    }
+  })
+  return hasAccess
+}
+function passKeycloak () {
+  const keycloak = new Keycloak(theme.value.keycloak)
+  keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
+    if (auth) {
+      const acceptedRoles = _.get(theme.value, 'keycloak.roles', [])
+      if (_.isEmpty(acceptedRoles)) return true
+      // check roles
+      const userRoles = _.get(keycloak, 'realmAccess.roles', [])
+      if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) return true
+      return false
+    } else {
+      window.location.reload()
+    }
+  })
+}
 
 // Hooks
 onMounted(() => {
-  if (!(_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) && (theme.value.useKeycloak !== 'true')) return false
-  if (theme.value.keycloak) {
-    useKeycloak.value = true
-    const keycloak = new Keycloak(theme.value.keycloak)
-    keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
-      if (auth) {
-        isAuthenticated.value = true
-        const acceptedRoles = _.get(theme.value, 'keycloak.roles', [])
-        if (_.isEmpty(acceptedRoles)) hasAccess.value = true
-        else {
-          const userRoles = _.get(keycloak, 'realmAccess.roles', [])
-          if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) hasAccess.value = true
-          else $q.dialog({
-            title: 'Accés refusé',
-            message: 'Vous n\'êtes pas autorisé à accèder à ce site'
-          }).onOk(() => {
-            window.location.href=theme.value.keycloak.fallbackUrl
-          })
-        }
-      } else {
-        window.location.reload()
-      }
+  const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
+  const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
+  if (useReferrer) {
+    hasAccess.value = passReferrer()
+  }
+  if (!hasAccess.value) {
+    if (useKeycloak) {
+      hasAccess.value = passKeycloak()
+    } else {
+      hasAccess.value = !useReferrer
+    }
+  }
+  if (!hasAccess.value) {
+    // otherwise
+    $q.dialog({
+      title: 'Accés refusé',
+      message: 'Vous n\'êtes pas autorisé à accèder à ce site'
+    }).onOk(() => {
+      window.location.href=theme.value.keycloak.fallbackUrl
     })
-  } else {
-    console.error('Invalid SSO configutation: keycloak settings must be defined')
   }
 })
 </script>
