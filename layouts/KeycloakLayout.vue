@@ -24,7 +24,7 @@ const hasAccess = ref(false)
 function passReferrer () {
   if (!document.referrer) return false
   let domains = _.get(theme.value, 'referrer.domains', [])
-  if (!Arrays.isArray(domains)) domains = [domains]
+  if (!Arrays.isArray(domains)) domains = _.split(domains, ',')
   let hasAccess = false
   _.forEach(domains, domain => {
     if (document.referrer.contains(domain)) {
