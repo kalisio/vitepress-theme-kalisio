@@ -25,25 +25,24 @@ function passReferrer () {
   if (!document.referrer) return false
   let subdomains = _.get(theme.value, 'referrer.subdomains', [])
   if (!Array.isArray(subdomains)) subdomains = _.split(subdomains, ',')
-  let pass = false
   _.forEach(subdomains, subdomain => {
     if (document.referrer.includes(subdomain)) {
-      pass = true
+      hasAccess.value = true
       return false
     }
   })
-  return pass
 }
 function passKeycloak () {
   const keycloak = new Keycloak(theme.value.keycloak)
   keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
     if (auth) {
       const acceptedRoles = _.get(theme.value, 'keycloak.roles', [])
-      if (_.isEmpty(acceptedRoles)) return true
-      // check roles
-      const userRoles = _.get(keycloak, 'realmAccess.roles', [])
-      if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) return true
-      return false
+      if (_.isEmpty(acceptedRoles)) hasAccess.value = true
+      else {
+        // check roles
+        const userRoles = _.get(keycloak, 'realmAccess.roles', [])
+        if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) hasAccess.value = true
+      }
     } else {
       window.location.reload()
     }
@@ -54,16 +53,8 @@ function passKeycloak () {
 onMounted(() => {
   const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
   const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
-  if (useReferrer) {
-    hasAccess.value = passReferrer()
-  }
-  if (!hasAccess.value) {
-    if (useKeycloak) {
-      hasAccess.value = passKeycloak()
-    } else {
-      hasAccess.value = !useReferrer
-    }
-  }
+  if (useReferrer) passReferrer()
+  if (!hasAccess.value && useKeycloak) passKeycloak()
   if (!hasAccess.value) {
     // otherwise
     $q.dialog({
