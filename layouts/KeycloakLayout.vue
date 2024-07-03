@@ -25,7 +25,7 @@ function passReferrer () {
   console.log(document.referrer)
   if (!document.referrer) return false
   let domains = _.get(theme.value, 'referrer.domains', [])
-  if (!Arrays.isArray(domains)) domains = _.split(domains, ',')
+  if (!Array.isArray(domains)) domains = _.split(domains, ',')
   console.log(domaines)
   let pass = false
   _.forEach(domains, domain => {
@@ -57,13 +57,13 @@ function passKeycloak () {
 onMounted(() => {
   const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
   const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
+  console.log(useReferrer, useKeycloak)
   if (useReferrer) {
     hasAccess.value = passReferrer()
   }
   if (!hasAccess.value) {
-    console.log('pass keycloak')
     if (useKeycloak) {
-      //hasAccess.value = passKeycloak()
+      hasAccess.value = passKeycloak()
       hasAccess.value = true
     } else {
       hasAccess.value = !useReferrer
