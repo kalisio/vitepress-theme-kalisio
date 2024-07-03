@@ -26,7 +26,7 @@ function passReferrer () {
   if (!document.referrer) return false
   let domains = _.get(theme.value, 'referrer.domains', [])
   if (!Array.isArray(domains)) domains = _.split(domains, ',')
-  console.log(domaines)
+  console.log(domains)
   let pass = false
   _.forEach(domains, domain => {
     if (document.referrer.contains(domain)) {
