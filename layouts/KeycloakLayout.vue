@@ -24,16 +24,16 @@ const hasAccess = ref(false)
 function passReferrer () {
   console.log(document.referrer)
   if (!document.referrer) return false
-  let domains = _.get(theme.value, 'referrer.domains', [])
-  console.log(domains)
-  if (!Array.isArray(domains)) {
-    console.log('array', domains)
-    domains = _.split(domains, ',')
+  let subdomains = _.get(theme.value, 'referrer.subdomains', [])
+  console.log(subdomains)
+  if (!Array.isArray(subdomains)) {
+    console.log('array', subdomains)
+    subdomains = _.split(subdomains, ',')
   }
-  console.log(domains)
+  console.log(subdomains)
   let pass = false
-  _.forEach(domains, domain => {
-    if (document.referrer.contains(domain)) {
+  _.forEach(subdomains, subdomain => {
+    if (document.referrer.contains(subdomain)) {
       pass = true
       return false
     }
