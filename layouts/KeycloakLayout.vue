@@ -22,17 +22,20 @@ const hasAccess = ref(false)
 
 // Functions
 function passReferrer () {
+  console.log(document.referrer)
   if (!document.referrer) return false
   let domains = _.get(theme.value, 'referrer.domains', [])
   if (!Arrays.isArray(domains)) domains = _.split(domains, ',')
-  let hasAccess = false
+  console.log(domaines)
+  let pass = false
   _.forEach(domains, domain => {
     if (document.referrer.contains(domain)) {
-      hasAccess = true
+      pass = true
       return false
     }
   })
-  return hasAccess
+  console.log(pass)
+  return pass
 }
 function passKeycloak () {
   const keycloak = new Keycloak(theme.value.keycloak)
@@ -58,6 +61,7 @@ onMounted(() => {
     hasAccess.value = passReferrer()
   }
   if (!hasAccess.value) {
+    console.log('pass keycloak')
     if (useKeycloak) {
       hasAccess.value = passKeycloak()
     } else {
