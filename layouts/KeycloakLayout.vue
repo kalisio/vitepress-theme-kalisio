@@ -33,7 +33,7 @@ function passReferrer () {
   console.log(subdomains)
   let pass = false
   _.forEach(subdomains, subdomain => {
-    if (document.referrer.contains(subdomain)) {
+    if (document.referrer.includes(subdomain)) {
       pass = true
       return false
     }
