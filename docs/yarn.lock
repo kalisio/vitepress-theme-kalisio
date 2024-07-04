@@ -795,7 +795,7 @@ vite@^5.2.11:
 
 "vitepress-theme-kalisio@https://github.com/kalisio/vitepress-theme-kalisio":
   version "0.1.0"
-  resolved "https://github.com/kalisio/vitepress-theme-kalisio#9291239c846f8a5cff8d3ad0253a345126f8a1a6"
+  resolved "https://github.com/kalisio/vitepress-theme-kalisio#76d02a39bff7d81e57a7ed39710228b2dfa45cc4"
 
 vitepress@^1.0.2:
   version "1.2.2"
