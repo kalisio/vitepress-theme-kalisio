@@ -1,10 +1,24 @@
 # Usage
 
+## Using referrer restriction
+
+To restrict the access to the site from a set of subdomains referrers, you need to declare the following properties in the `ThemeConfig` object:
+
+1. `referrer` with such a content:
+
+```js
+referrer: {
+  subdomains: 'kalisio.com,doc.kalisio.xyz'  // Subdomains to auhtorize the access
+}
+```
+
+2. `useReferrer` to `true`
+
 ## Using Keycloak authentication
 
-To enforce user authentication with **Keycloak**, all you need to do is:
+To enforce user authentication with **Keycloak**, all you need to do is to declare the followinf properties in the `ThemeConfig` object:
 
-1. Declare a `keycloak` section in the `ThemeConfig` object like this:
+1. `keycloak` with such a content:
 
 ```js
 keycloak: {
@@ -16,7 +30,7 @@ keycloak: {
 }
 ```
 
-2. Declare a `useKeycloak` property to `true` in the `ThemeConfig` object:
+2. `useKeycloak` to `true`
 
 ```js
 useKeycloak: true
@@ -24,6 +38,10 @@ useKeycloak: true
 
 ::: tip
 During development, it may be convenient to bypass **Keycloak** authentication. You can achieve this by either commenting out the relevant line or utilizing an environment variable. This allows you to set or unset the variable, avoiding the need to modify the `config.js` file.
+:::
+
+::: tip
+You can combine **referrer restriction** and **Keycloak authentication**. In that case, **Keycloak authentication** will be executed if and only if **referrer restriction** fails.
 :::
 
 ## Using Quasar framework
