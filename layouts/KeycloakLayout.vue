@@ -56,17 +56,17 @@ async function passKeycloak () {
 onMounted(async () => {
   const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
   const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
-  console.log(useReferrer, useKeycloak)
-  if (useReferrer) hasAccess.value = passReferrer()
-  if (!hasAccess.value && useKeycloak) hasAccess.value = await passKeycloak()
-  console.log(hasAccess.value)
-  if (!hasAccess.value) {
-    $q.dialog({
-      title: 'Accés refusé',
-      message: 'Vous n\'êtes pas autorisé à accèder à ce site'
-    }).onOk(() => {
-      window.location.href=theme.value.keycloak.fallbackUrl
-    })
-  }
+  if (useReferrer || useKeycloak) {
+    if (useReferrer) hasAccess.value = passReferrer()
+    if (!hasAccess.value && useKeycloak) hasAccess.value = await passKeycloak()
+    if (!hasAccess.value) {
+      $q.dialog({
+        title: 'Accés refusé',
+        message: 'Vous n\'êtes pas autorisé à accèder à ce site'
+      }).onOk(() => {
+        window.location.href=theme.value.keycloak.fallbackUrl
+      })
+    }
+  } else hasAccess.value = true
 })
 </script>
