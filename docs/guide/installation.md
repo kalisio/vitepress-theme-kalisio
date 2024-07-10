@@ -22,7 +22,7 @@ You also need to install the required dev dependencies:
 | **lodash** | ^4.17.21 |
 | **moment** | ^2.30.1 |
 | **quasar** | ^2.14.3 |
-| **vitepress** | ^1.0.2 |
+| **vitepress** | ^1.3.0 |
 
 ::: tip
 You can also copy the following `devDependencies` in your `package.json` and install them:
@@ -32,7 +32,7 @@ You can also copy the following `devDependencies` in your `package.json` and ins
   "lodash": "^4.17.21",
   "moment": "^2.30.1",
   "quasar": "^2.14.3",
-  "vitepress": "^1.0.2",
+  "vitepress": "^1.3.0",
   "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
 }
 ```
