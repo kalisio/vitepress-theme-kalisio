@@ -1,14 +1,11 @@
 <template>
   <div v-if="hasAccess">
-    <Layout>
-      <Content />
-    </Layout>
+    <Layout />
   </div>
 </template>
 
 <script setup>
 import _ from 'lodash'
-import logger from 'loglevel'
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { ref, onMounted } from 'vue'
@@ -19,20 +16,17 @@ import Keycloak from 'keycloak-js'
 const { theme } = useData()
 const { Layout } = DefaultTheme
 const $q = useQuasar()
-const hasAccess = ref(false)
+const hasAccess = ref(true)
 
 // Functions
 function passReferrer () {
-  console.log('passReferrer - document referrer:', document.referrer)
   if (!document.referrer) return false
   let subdomains = _.get(theme.value, 'referrer.subdomains', [])
   if (!Array.isArray(subdomains)) subdomains = _.split(subdomains, ',')
-  console.log('passReferrer - allowed subdomains:', subdomains)
   let result = false
   _.forEach(subdomains, subdomain => {
     if (document.referrer.includes(subdomain)) {
       result = true
-      console.log('passReferrer - pass subdomain:', subdomain)
       return false
     }
   })
@@ -59,9 +53,7 @@ async function passKeycloak () {
 // Hooks
 onMounted(async () => {
   const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
-  console.log('useReferrer:', useReferrer)
   const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
-  console.log('useKeycloak:', useKeycloak)
   if (useReferrer || useKeycloak) {
     if (useReferrer) hasAccess.value = passReferrer()
     if (!hasAccess.value && useKeycloak) hasAccess.value = await passKeycloak()
@@ -73,6 +65,6 @@ onMounted(async () => {
         window.location.href=theme.value.keycloak.fallbackUrl
       })
     }
-  } else hasAccess.value = true
+  }
 })
 </script>
