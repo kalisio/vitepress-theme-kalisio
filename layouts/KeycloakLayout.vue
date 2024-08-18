@@ -27,7 +27,7 @@ function passReferrer () {
   if (!document.referrer) return false
   let subdomains = _.get(theme.value, 'referrer.subdomains', [])
   if (!Array.isArray(subdomains)) subdomains = _.split(subdomains, ',')
-  console.log('passReferrer - allowed subdomains:', document.subdomains)
+  console.log('passReferrer - allowed subdomains:', subdomains)
   let result = false
   _.forEach(subdomains, subdomain => {
     if (document.referrer.includes(subdomain)) {
