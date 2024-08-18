@@ -41,6 +41,7 @@ export default defineConfig({
       { icon: 'twitter', link: 'https://twitter.com/Kalisio3' },
       { icon: 'youtube', link: 'https://www.youtube.com/channel/UCovN722Sgw61M6uk-73vwQw' },
     ],
+    useReferrer: false,
     useKeycloak: false,
     keycloak: {
       url: process.env.KEYCLOAK_URL,
