@@ -9,9 +9,8 @@ The full documentation is available [here](https://kalisio.github.io/vitepress-t
 
 ## License
 
-This project is licensed under the MIT License - see the [license file](./docs/LICENSE) for details
+Licensed under the [MIT license](LICENSE).
 
-## Authors
+Copyright (c) 2017-20xx [Kalisio](https://kalisio.com)
 
-This project is sponsored by
 [![Kalisio](https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png)](https://kalisio.com)
