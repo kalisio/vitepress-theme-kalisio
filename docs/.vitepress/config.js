@@ -6,12 +6,12 @@ export default defineConfig({
   description: "Kalisio Vitepress Theme",
   lastUpdated: true,
   head: [
-    [ 'link', { rel: "icon", type: "image/ico", href: "kalisio.ico" }],
+    [ 'link', { rel: "icon", type: "image/png", href: "https://kalisio.github.io/kalisioscope/kalisio/kalisio-icon-light-128x128.png" }],
     [ 'link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons', type: 'text/css' } ]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/kalisio.png',
+    logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png',
     nav: [
       { text: 'Guide', link: 'guide/installation.md' },
       { text: 'About', link: 'about/motivation.md' }
