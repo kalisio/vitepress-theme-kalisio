@@ -5,13 +5,13 @@
 To install the theme using the master branch:
 
 ```bash
-yarn add -D https://github.com/kalisio/vitepress-theme-kalisio
+pnpm add -D https://github.com/kalisio/vitepress-theme-kalisio
 ```
 
 To install the theme using a specific branch:
 
 ```bash
-yarn add -D https://github.com/kalisio/vitepress-theme-kalisio#<branch>
+pnpm add -D https://github.com/kalisio/vitepress-theme-kalisio#<branch>
 ```
 
 You also need to install the required dev dependencies:
