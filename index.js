@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import DefaultTheme from 'vitepress/theme'
 import { Quasar, Dialog } from 'quasar'
 import KeycloakLayout from './layouts/KeycloakLayout.vue'
@@ -13,7 +12,7 @@ import './custom.css'
 export default {
   extends: DefaultTheme,
   Layout: KeycloakLayout,
-  enhanceApp({ app }) {
+  enhanceApp ({ app }) {
     // Use Quasar framework
     app.use(Quasar, { plugins: { Dialog } }, { req: { headers: {} } })
     // Dynamic registration of all components

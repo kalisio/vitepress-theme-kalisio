@@ -1,22 +1,19 @@
 {
   "name": "bookmark",
   "description": "Kalisio's bookmark",
+  "packageManager": "pnpm@10.28.0",
   "version": "0.1.0",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "htttps://github.com/kalisio/bookmark"
+    "url": "https://github.com/kalisio/vitepress-theme-kalisio"
   },
   "type": "module",
   "scripts": {
     "test": "echo \"Warning: no test specified\"",
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview",
-    "release:major": "npm version --force major",
-    "release:minor": "npm version --force minor",
-    "release:patch": "npm version --force patch",
-    "postversion": "git push origin HEAD --tags"
+    "preview": "vitepress preview"
   },
   "devDependencies": {
     "keycloak-js": "^23.0.5",
