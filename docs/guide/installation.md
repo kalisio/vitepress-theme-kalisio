@@ -25,6 +25,10 @@ You also need to install the required dev dependencies:
 | **vitepress** | ^1.3.0 |
 
 ::: tip
+[OpenAPI](./usage.md#using-openapi-documentation) support is shipped with the theme through [vitepress-openapi](https://vitepress-openapi.vercel.app/) and installed automatically — no extra dependency is required.
+:::
+
+::: tip
 You can also copy the following `devDependencies` in your `package.json` and install them:
 ```json
 "devDependencies": {

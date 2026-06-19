@@ -65,5 +65,8 @@
     "quasar": "^2.14.3",
     "vitepress": "^1.3.0",
     "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "vitepress-openapi": "^0.2.0"
   }
 }

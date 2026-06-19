@@ -52,6 +52,30 @@ You can combine **referrer restriction** and **Keycloak authentication**. In tha
 There is still some work to be done to use SASS **Quasar** variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
 :::
 
+## Using OpenAPI documentation
+
+The theme ships with [vitepress-openapi](https://vitepress-openapi.vercel.app/), so you can render API reference pages from an **OpenAPI** specification without any extra setup. Its components (`OASpec`, `OAOperation`, `OAIntroduction`, ...) are registered globally and its styles are already imported by the theme.
+
+To render a full specification, import the spec and use the `OASpec` component in a Markdown page:
+
+```md
+<script setup>
+import spec from '../public/openapi.json'
+</script>
+
+<OASpec :spec="spec" />
+```
+
+To render a single operation, use `OAOperation` with the `operationId` declared in your spec:
+
+```md
+<OAOperation :spec="spec" operationId="getUsers" />
+```
+
+::: tip
+You can place your specification anywhere that VitePress can import (e.g. the `public` folder) and reference it from your pages. See the [vitepress-openapi documentation](https://vitepress-openapi.vercel.app/components/) for the full list of components and configuration options.
+:::
+
 ## Using ready-made components
 
 Here, we offer a comprehensive description of the various components shipped with the theme.

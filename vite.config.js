@@ -26,7 +26,9 @@ export default mergeConfig(baseConfig, defineConfig({
         ...builtinModules.map((m) => `node:${m}`),
         ...Object.keys(packageJson.dependencies ?? {}),
         ...Object.keys(packageJson.peerDependencies ?? {}),
-        'vitepress/theme'
+        'vitepress/theme',
+        'vitepress-openapi/client',
+        'vitepress-openapi/dist/style.css'
       ]
     }
   }
