@@ -52,7 +52,7 @@ You can combine **referrer restriction** and **Keycloak authentication**. In tha
 There is still some work to be done to use SASS **Quasar** variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
 :::
 
-## Using OpenAPI documentation
+## Using OpenAPI extension 
 
 The theme ships with [vitepress-openapi](https://vitepress-openapi.vercel.app/), so you can render API reference pages from an **OpenAPI** specification without any extra setup. Its components (`OASpec`, `OAOperation`, `OAIntroduction`, ...) are registered globally and its styles are already imported by the theme.
 
