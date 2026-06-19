@@ -40,6 +40,7 @@
     "release": "changeset publish",
     "prepare": "husky",
     "build": "vite build",
+    "docs:build": "pnpm -C docs install && pnpm -C docs build",
     "lint": "standard '**/*.js' --fix",
     "postrelease": "git push --follow-tags"
   },
