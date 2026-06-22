@@ -1,8 +1,8 @@
 <template>
   <a href="https://kalisio.com">
-    <Image 
-      src="//s3.eu-central-1.amazonaws.com/kalisioscope/kalisio/kalisio-logo-black-256x84.png"
-      darkSrc="https://s3.eu-central-1.amazonaws.com/kalisioscope/kalisio/kalisio-logo-white-256x84.png"
+    <Image
+      src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png"
+      darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
     />
   </a>
 </template>
