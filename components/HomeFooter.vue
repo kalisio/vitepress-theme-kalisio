@@ -24,8 +24,8 @@ const { theme, isDark } = useData()
 
 // computed
 const computedLogo = computed(() => {
-  if (isDark.value) return 'https://s3.eu-central-1.amazonaws.com/kalisioscope/kalisio/kalisio-logo-white-256x84.png'
-  return 'https://s3.eu-central-1.amazonaws.com/kalisioscope/kalisio/kalisio-logo-black-256x84.png'
+  if (isDark.value) return 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png'
+  return 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png'
 })
 const hasTrustLogo = computed(() => {
   if (_.has(theme.value, 'trustLogos')) return true
