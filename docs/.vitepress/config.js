@@ -11,7 +11,7 @@ export default defineConfig({
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png',
+    logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png',
     nav: [
       { text: 'Guide', link: 'guide/installation.md' },
       { text: 'About', link: 'about/motivation.md' }
