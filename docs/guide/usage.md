@@ -107,10 +107,12 @@ It exposes the following props:
 
 > Example
 > ```md
-> <Image src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png" darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png" />
+> <Image src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png" 
+> darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png" />
 > ```
 >
-> <Image src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png" darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png" />
+> <Image src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-256x96.png" 
+> darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png" />
 
 ### KalisioLogo
 
