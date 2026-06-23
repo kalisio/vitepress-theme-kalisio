@@ -3,16 +3,19 @@ import { dirname } from 'node:path'
 import { builtinModules } from 'node:module'
 import { readFileSync } from 'node:fs'
 import vue from '@vitejs/plugin-vue'
-import { defineConfig, mergeConfig } from 'vite'
-import { baseConfig } from './vite.base-config.js'
+import { defineConfig } from 'vite'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'))
 
-export default mergeConfig(baseConfig, defineConfig({
+export default defineConfig({
   root: __dirname,
   plugins: [vue()],
   build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    sourcemap: true,
+    minify: true,
     lib: {
       entry: {
         index: 'index.js'
@@ -25,11 +28,11 @@ export default mergeConfig(baseConfig, defineConfig({
         ...builtinModules,
         ...builtinModules.map((m) => `node:${m}`),
         ...Object.keys(packageJson.dependencies ?? {}),
-        ...Object.keys(packageJson.peerDependencies ?? {}),
+        ...Object.keys(packageJson.devDependencies ?? {}),
         'vitepress/theme',
         'vitepress-openapi/client',
         'vitepress-openapi/dist/style.css'
       ]
     }
   }
-}))
+})
