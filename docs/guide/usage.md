@@ -76,6 +76,43 @@ To render a single operation, use `OAOperation` with the `operationId` declared 
 You can place your specification anywhere that VitePress can import (e.g. the `public` folder) and reference it from your pages. See the [vitepress-openapi documentation](https://vitepress-openapi.vercel.app/components/) for the full list of components and configuration options.
 :::
 
+## Generating package sidebars
+
+The theme ships a `generateSideBar` helper that builds a VitePress sidebar automatically from the files of a package, so you don't have to maintain the sidebar entries by hand.
+
+It is a build-time helper (it reads the file system), so it is exposed on a dedicated entry point and used in your `config.js`, **not** in the theme.
+
+List your package names in a `packages.json` file next to your config and generate every package sidebar at once:
+
+```js
+import { defineConfig } from 'vitepress'
+import { generateSideBar } from 'vitepress-theme-kalisio/sidebar'
+import packages from './packages.json'
+
+const sortedPackageSidebar = Object.fromEntries(
+  packages.sort().map(pkg => [`/packages/${pkg}/`, generateSideBar(pkg)])
+)
+
+export default defineConfig({
+  themeConfig: {
+    sidebar: {
+      // ...your own hand-written sections (e.g. '/overview/')
+      ...sortedPackageSidebar
+    }
+  }
+})
+```
+
+For each package, the helper walks `packages/<name>/` and returns a sidebar where:
+
+* a top-level link to the package landing page (`/packages/<name>/index`) is always added first,
+* every `.md` file other than `index.md` becomes a link (its name without the `.md` extension),
+* every sub-folder that contains at least one such file becomes a nested group (empty folders are skipped).
+
+::: tip
+The package folder is resolved relative to the current working directory (`packages/<name>`), so run VitePress from the repository root.
+:::
+
 ## Using ready-made components
 
 Here, we offer a comprehensive description of the various components shipped with the theme.
