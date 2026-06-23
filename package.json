@@ -57,10 +57,14 @@
     "standard": "^17.1.2",
     "vite": "^8.0.16",
     "vitepress": "^1.3.0",
-    "vue": "^3.4.0",
-    "vitepress-openapi": "^0.2.0"
-
+    "vue": "^3.4.0"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "vitepress-openapi": "^0.2.0"
+  },
+  "peerDependenciesMeta": {
+    "vitepress-openapi": {
+      "optional": true
+    }
   }
 }

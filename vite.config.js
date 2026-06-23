@@ -27,8 +27,8 @@ export default defineConfig({
       external: [
         ...builtinModules,
         ...builtinModules.map((m) => `node:${m}`),
-        ...Object.keys(packageJson.dependencies ?? {}),
         ...Object.keys(packageJson.devDependencies ?? {}),
+        ...Object.keys(packageJson.peerDependencies ?? {}),
         'vitepress/theme',
         'vitepress-openapi/client',
         'vitepress-openapi/dist/style.css'
