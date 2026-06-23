@@ -26,6 +26,7 @@
       "development": "./index.js",
       "import": "./dist/index.mjs"
     },
+    "./sidebar": "./src/sidebar.mjs",
     "./style.css": "./dist/vitepress-theme-kalisio.css"
   },
   "lint-staged": {

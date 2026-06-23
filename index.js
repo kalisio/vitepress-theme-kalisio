@@ -9,7 +9,7 @@ import KalisioMaps from './components/KalisioMaps.vue'
 import TemplateAnchor from './components/TemplateAnchor.vue'
 import TourLink from './components/TourLink.vue'
 import 'vitepress-openapi/dist/style.css'
-import './custom.css'
+import './css/custom.css'
 
 export default {
   extends: DefaultTheme,
@@ -17,7 +17,7 @@ export default {
   enhanceApp ({ app }) {
     // Use Quasar framework
     app.use(Quasar, { plugins: { Dialog } }, { req: { headers: {} } })
-    // Usage of vitepress-openapi components 
+    // Usage of vitepress-openapi components
     openApiTheme.enhanceApp({ app })
     // Dynamic registration of all components
     app.component('HomeFooter', HomeFooter)
