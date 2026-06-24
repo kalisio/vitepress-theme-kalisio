@@ -15,7 +15,11 @@
     "theme",
     "kalisio"
   ],
-  "author": "Kalisio team",
+  "author": {
+    "name": "Kalisio",
+    "email": "contact@kalisio.com",
+    "url": "https://github.com/kalisio"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kalisio/vitepress-theme-kalisio/issues"
@@ -29,6 +33,23 @@
     "./sidebar": "./src/sidebar.mjs",
     "./style.css": "./dist/vitepress-theme-kalisio.css"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./dist/index.mjs"
+      },
+      "./sidebar": "./src/sidebar.mjs",
+      "./style.css": "./dist/vitepress-theme-kalisio.css"
+    }
+  },
   "lint-staged": {
     "**/*.js": [
       "pnpm lint"
@@ -40,6 +61,7 @@
     "change": "changeset",
     "release": "changeset publish",
     "prepare": "husky",
+    "prepack": "vite build",
     "build": "vite build",
     "docs:build": "pnpm -C docs install && pnpm -C docs build",
     "lint": "standard '**/*.js' --fix",
