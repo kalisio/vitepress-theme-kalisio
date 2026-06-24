@@ -54,7 +54,13 @@ There is still some work to be done to use SASS **Quasar** variables, internatio
 
 ## Using OpenAPI extension 
 
-The theme ships with [vitepress-openapi](https://vitepress-openapi.vercel.app/), so you can render API reference pages from an **OpenAPI** specification without any extra setup. Its components (`OASpec`, `OAOperation`, `OAIntroduction`, ...) are registered globally and its styles are already imported by the theme.
+The theme integrates [vitepress-openapi](https://vitepress-openapi.vercel.app/) to render API reference pages from an **OpenAPI** specification. Its components (`OASpec`, `OAOperation`, `OAIntroduction`, ...) are registered globally and its styles are imported by the theme.
+
+`vitepress-openapi` is declared as an **optional peer dependency**, so you must install it in your project to use these components (see [Installation](./installation.md#installing-the-theme)):
+
+```bash
+pnpm add -D vitepress-openapi
+```
 
 To render a full specification, import the spec and use the `OASpec` component in a Markdown page:
 

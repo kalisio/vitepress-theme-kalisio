@@ -25,7 +25,11 @@ You also need to install the required dev dependencies:
 | **vitepress** | ^1.3.0 |
 
 ::: tip
-[OpenAPI](./usage.md#using-openapi-documentation) support is shipped with the theme through [vitepress-openapi](https://vitepress-openapi.vercel.app/) and installed automatically — no extra dependency is required.
+[OpenAPI](./usage.md#using-openapi-extension) support is provided through [vitepress-openapi](https://vitepress-openapi.vercel.app/), declared as an **optional peer dependency**. If your site uses the OpenAPI components, you must install `vitepress-openapi` (`^0.2.0`) yourself:
+
+```bash
+pnpm add -D vitepress-openapi
+```
 :::
 
 ::: tip
@@ -37,6 +41,7 @@ You can also copy the following `devDependencies` in your `package.json` and ins
   "moment": "^2.30.1",
   "quasar": "^2.14.3",
   "vitepress": "^1.3.0",
+  "vitepress-openapi": "^0.2.0",
   "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
 }
 ```
