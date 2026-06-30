@@ -27,7 +27,7 @@
   "homepage": "https://github.com/kalisio/vitepress-theme-kalisio#readme",
   "exports": {
     ".": {
-      "development": "./index.js",
+      "development": "./dist/index.mjs",
       "import": "./dist/index.mjs"
     },
     "./sidebar": "./src/sidebar.mjs",
