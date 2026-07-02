@@ -1,5 +1,16 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { useSidebar } from 'vitepress-openapi'
+
+
+// Load the package's OpenAPI spec 
+function loadOpenApiSpec (pkg) {
+  const specPath = path.resolve(process.cwd(), `public/${pkg}-openapi.json`)
+  if (!fs.existsSync(specPath)) {
+    return null
+  }
+  return JSON.parse(fs.readFileSync(specPath, 'utf-8'))
+}
 
 export function generateSideBar (pkg) {
   // Ensure the pkg folder exists
@@ -44,8 +55,25 @@ export function generateSideBar (pkg) {
     return items
   }
   // Build the sidebar tree
-  return [
+   const items = [
     { text: pkg, link: `/packages/${pkg}/index` },
     ...buildTree(pkgDir)
   ]
+
+  // Load the OpenAPI spec
+  const spec = loadOpenApiSpec(pkg)
+
+  // No spec case
+  if (!spec) return items
+
+  // Attach the operations tree to the API page link
+  const apiLink = `/packages/${pkg}/${pkg}-openapi`
+  const apiItem = items.find(item => item.link === apiLink)
+  if (apiItem) {
+    
+    apiItem.collapsed = false
+    apiItem.items = useSidebar({ spec }).itemsByPaths({ linkPrefix: `${apiLink}#` })
+  }
+  return items
+  
 }
