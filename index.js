@@ -1,6 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import { Quasar, Dialog } from 'quasar'
-import { theme as openApiTheme } from 'vitepress-openapi/client'
+import { theme as openApiTheme, useTheme } from 'vitepress-openapi/client'
 import KeycloakLayout from './layouts/KeycloakLayout.vue'
 import HomeFooter from './components/HomeFooter.vue'
 import Image from './components/Image.vue'
@@ -19,6 +19,8 @@ export default {
     app.use(Quasar, { plugins: { Dialog } }, { req: { headers: {} } })
     // Usage of vitepress-openapi components
     openApiTheme.enhanceApp({ app })
+    // Enable the custom server option for API
+    useTheme({ server: { allowCustomServer: true } })
     // Dynamic registration of all components
     app.component('HomeFooter', HomeFooter)
     app.component('Image', Image)
