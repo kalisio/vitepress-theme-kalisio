@@ -18,7 +18,8 @@ export default defineConfig({
     minify: true,
     lib: {
       entry: {
-        index: 'index.js'
+        index: 'index.js',
+        sidebar: 'src/sidebar.js'
       },
       formats: ['es'],
       fileName: (format, entryName) => `${entryName}.mjs`
@@ -27,6 +28,7 @@ export default defineConfig({
       external: [
         ...builtinModules,
         ...builtinModules.map((m) => `node:${m}`),
+        ...Object.keys(packageJson.dependencies ?? {}),
         ...Object.keys(packageJson.devDependencies ?? {}),
         ...Object.keys(packageJson.peerDependencies ?? {}),
         'vitepress/theme',

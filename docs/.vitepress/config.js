@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import { generateSidebars } from '../../src/sidebar.mjs'
+import { generateSidebars } from '../../src/sidebar.js'
 
 export default defineConfig({
   base: '/vitepress-theme-kalisio/',
@@ -14,9 +14,12 @@ export default defineConfig({
     logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png',
     nav: [
       { text: 'Guide', link: '/guide/installation' },
-      { text: 'About', link: '/about/motivation' }
+      { text: 'About', link: '/about/01-motivation' }
     ],
-    sidebar: generateSidebars({ rootDir: '.', baseUrl: '', capitalize: true }),
+    sidebar: generateSidebars({
+      configUrl: import.meta.url,
+      capitalize: true
+    }),
     footer: {
       copyright: 'Copyright © 2017-20xx - KALISIO'
     },
@@ -41,7 +44,7 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['keycloak-js', 'lodash']
+      include: ['keycloak-js', 'lodash-es']
     },
     build: {
       commonjsOptions: {
@@ -49,7 +52,7 @@ export default defineConfig({
       }
     },
     ssr: {
-      noExternal: ['vitepress-theme-kalisio']
+      noExternal: ['@kalisio/vitepress-theme']
     }
   }
 })

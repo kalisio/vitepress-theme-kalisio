@@ -1,3 +1,7 @@
+---
+title: Motivation
+---
+
 # Motivation
 
 **vitepress-theme-kalisio** is designed to enhance the functionality of [VitePress](https://vitepress.dev/), a static site generator powered by [Vue](https://vuejs.org/). This theme integrates several features to streamline and enhance the development of documentation websites.

@@ -1,2 +1,2 @@
-import theme from '@kalisio/vitepress-theme'
+import theme from '../../../index.js'
 export default theme

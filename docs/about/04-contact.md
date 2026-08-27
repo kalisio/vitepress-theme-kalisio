@@ -1,3 +1,7 @@
+---
+title: Contact
+---
+
 # Contact
 
 End user ? Contact us on our [website](https://kalisio.com/).
