@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-import _ from 'lodash'
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import { ref, onMounted } from 'vue'
@@ -21,48 +20,42 @@ const hasAccess = ref(true)
 // Functions
 function passReferrer () {
   if (!document.referrer) return false
-  let subdomains = _.get(theme.value, 'referrer.subdomains', [])
-  if (!Array.isArray(subdomains)) subdomains = _.split(subdomains, ',')
-  let result = false
-  _.forEach(subdomains, subdomain => {
-    if (document.referrer.includes(subdomain)) {
-      result = true
-      return false
-    }
-  })
-  return result
+  let subdomains = theme.value?.referrer?.subdomains ?? []
+  if (!Array.isArray(subdomains)) subdomains = String(subdomains).split(',')
+  return subdomains.some(subdomain => document.referrer.includes(subdomain))
 }
 async function passKeycloak () {
-  return new Promise((resolve, reject) => {
-    const keycloak = new Keycloak(theme.value.keycloak)
-    keycloak.init({ onLoad: 'login-required', checkLoginIframe: false }).then((auth) => {
-      if (auth) {
-        const acceptedRoles = _.get(theme.value, 'keycloak.roles', [])
-        if (_.isEmpty(acceptedRoles)) resolve(true)
-        // check roles
-        const userRoles = _.get(keycloak, 'realmAccess.roles', [])
-        if (!_.isEmpty(_.intersection(userRoles, acceptedRoles))) resolve(true)
-        resolve(false)
-      } else {
-        window.location.reload()
-      }
-    })
-  })
+  const keycloak = new Keycloak(theme.value.keycloak)
+  let auth
+  try {
+    auth = await keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
+  } catch (error) {
+    console.error('[@kalisio/vitepress-theme] Keycloak init failed', error)
+    return false
+  }
+  if (!auth) {
+    window.location.reload()
+    return false
+  }
+  const acceptedRoles = theme.value?.keycloak?.roles ?? []
+  if (acceptedRoles.length === 0) return true
+  const userRoles = keycloak?.realmAccess?.roles ?? []
+  return userRoles.some(role => acceptedRoles.includes(role))
 }
 
 // Hooks
 onMounted(async () => {
-  const useReferrer = (_.isBoolean(theme.value.useReferrer) && theme.value.useReferrer) || theme.value.useReferrer === 'true'
-  const useKeycloak = (_.isBoolean(theme.value.useKeycloak) && theme.value.useKeycloak) || theme.value.useKeycloak === 'true'
+  const useReferrer = theme.value.useReferrer === true || theme.value.useReferrer === 'true'
+  const useKeycloak = theme.value.useKeycloak === true || theme.value.useKeycloak === 'true'
   if (useReferrer || useKeycloak) {
     if (useReferrer) hasAccess.value = passReferrer()
     if (!hasAccess.value && useKeycloak) hasAccess.value = await passKeycloak()
     if (!hasAccess.value) {
       $q.dialog({
-        title: 'Accés refusé',
-        message: 'Vous n\'êtes pas autorisé à accèder à ce site'
+        title: 'Accès refusé',
+        message: 'Vous n\'êtes pas autorisé à acceder à ce site'
       }).onOk(() => {
-        window.location.href=theme.value.keycloak.fallbackUrl
+        window.location.href = theme.value.keycloak.fallbackUrl
       })
     }
   }

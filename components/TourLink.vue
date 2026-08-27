@@ -2,6 +2,7 @@
 <template>
   <a target="_blank" :href="computedUrl">{{ text }}<i class="las la-external-link-square-alt"></i></a>
 </template>
+
 <script setup>
 import { computed } from 'vue'
 import { useData } from 'vitepress'

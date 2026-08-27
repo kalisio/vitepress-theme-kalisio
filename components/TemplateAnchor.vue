@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import _ from 'lodash'
 import { ref, onMounted } from 'vue'
 import { useData } from 'vitepress'
 
@@ -39,12 +38,15 @@ const href = ref('')
 
 // Hooks
 onMounted(async () => {
-  const _ = await import('lodash')
+  // Intentional dynamic import: _.template compiles via Function() and
+  // depends on theme.value (runtime domain/jwt) → must stay client-side,
+  // out of SSR/build. Do NOT switch back to a static import.
+  const { template } = await import('lodash-es')
   const moment = await import('moment')
-  const compiler = _.template(props.hrefTemplate)
-  const context = { moment: moment.default }
-  context.domain = _.get(theme.value, props.domainPath)
-  context.jwt = _.get(theme.value, props.jwtPath)
+  const compiler = template(props.hrefTemplate)
+  const context = { moment }
+  context.domain = theme.value[props.domainPath]
+  context.jwt = theme.value[props.jwtPath]
   href.value = compiler(context)
 })
 </script>

@@ -1,13 +1,38 @@
 {
-  "name": "vitepress-theme-kalisio",
-  "version": "1.0.0",
+  "name": "@kalisio/vitepress-theme",
   "description": "VitePress theme for Kalisio projects",
-  "packageManager": "pnpm@10.28.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kalisio/vitepress-theme-kalisio.git"
-  },
+  "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@10.32.0",
+  "exports": {
+    ".": {
+      "development": "./dist/index.mjs",
+      "import": "./dist/index.mjs"
+    },
+    "./sidebar": "./src/sidebar.mjs",
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "lint-staged": {
+    "**/*.js": [
+      "pnpm lint"
+    ]
+  },
+  "scripts": {
+    "prebump": "changeset",
+    "bump": "changeset version",
+    "build": "vite build",
+    "postbuild": "pnpm publint",
+    "lint": "standard '**/*.js' --fix",
+    "prepare": "husky",
+    "prerelease": "pnpm build",
+    "release": "changeset publish",
+    "postrelease": "git push --follow-tags",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "vue",
     "vite",
@@ -20,25 +45,48 @@
     "email": "contact@kalisio.com",
     "url": "https://github.com/kalisio"
   },
+  "contributors": [],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalisio/vitepress-theme-kalisio.git"
+  },
   "bugs": {
     "url": "https://github.com/kalisio/vitepress-theme-kalisio/issues"
   },
   "homepage": "https://github.com/kalisio/vitepress-theme-kalisio#readme",
-  "exports": {
-    ".": {
-      "development": "./dist/index.mjs",
-      "import": "./dist/index.mjs"
-    },
-    "./sidebar": "./src/sidebar.mjs",
-    "./style.css": "./dist/vitepress-theme-kalisio.css"
+  "dependencies": {
+    "keycloak-js": "^23.0.5",
+    "lodash-es": "~4.18.1",
+    "moment": "^2.30.1",
+    "vitepress-openapi": "~0.2.0"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "devDependencies": {
+    "@changesets/cli": "~2.30.0",
+    "@vitejs/plugin-vue": "~5.2.0",
+    "husky": "~9.1.7",
+    "knip": "~6.7.0",
+    "lint-staged": "~16.4.0",
+    "publint": "~0.3.20",
+    "quasar": "~2.14.3",
+    "rimraf": "~6.1.3",
+    "standard": "~17.1.2",
+    "vite": "~5.4.0",
+    "vitepress": "~1.6.0",
+    "vue": "~3.5.0"
+  },
+  "peerDependencies": {
+    "quasar": "~2.14.0",
+    "vitepress": "~1.6.0",
+    "vue": "~3.5.0"
+  },
   "engines": {
     "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "publishConfig": {
     "access": "public",
@@ -47,49 +95,7 @@
         "import": "./dist/index.mjs"
       },
       "./sidebar": "./src/sidebar.mjs",
-      "./style.css": "./dist/vitepress-theme-kalisio.css"
-    }
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "pnpm lint"
-    ]
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bump": "changeset version",
-    "change": "changeset",
-    "release": "changeset publish",
-    "prepare": "husky",
-    "prepack": "vite build",
-    "build": "vite build",
-    "postbuild": "pnpm publint",
-    "docs:build": "pnpm -C docs install && pnpm -C docs build",
-    "docs:dev": "pnpm --filter docs run dev",
-    "lint": "standard '**/*.js' --fix",
-    "postrelease": "git push --follow-tags"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.29.8",
-    "@vitejs/plugin-vue": "^6.0.7",
-    "husky": "^9.1.7",
-    "keycloak-js": "^23.0.5",
-    "lint-staged": "^17.0.7",
-    "lodash": "^4.17.21",
-    "moment": "^2.30.1",
-    "publint": "^0.3.21",
-    "quasar": "^2.14.3",
-    "standard": "^17.1.2",
-    "vite": "^8.0.16",
-    "vitepress": "^1.3.0",
-    "vue": "^3.4.0"
-  },
-  "peerDependencies": {
-    "vitepress-openapi": "^0.2.0"
-  },
-  "peerDependenciesMeta": {
-    "vitepress-openapi": {
-      "optional": true
+      "./style.css": "./dist/style.css"
     }
   }
 }

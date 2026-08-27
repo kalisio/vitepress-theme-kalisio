@@ -46,13 +46,13 @@ You can combine **referrer restriction** and **Keycloak authentication**. In tha
 
 ## Using Quasar framework
 
-**Quasar framework** is shipped with the theme. You can simply create any components and use any features provided by Quasar. 
+**Quasar framework** is shipped with the theme. You can simply create any components and use any features provided by Quasar.
 
 ::: warning
 There is still some work to be done to use SASS **Quasar** variables, internationalization (i18n) and plugins. For now the [Dialog plugin](https://quasar.dev/quasar-plugins/dialog/) is the only plugin installed.
 :::
 
-## Using OpenAPI extension 
+## Using OpenAPI extension
 
 The theme integrates [vitepress-openapi](https://vitepress-openapi.vercel.app/) to render API reference pages from an **OpenAPI** specification. Its components (`OASpec`, `OAOperation`, `OAIntroduction`, ...) are registered globally and its styles are imported by the theme.
 
@@ -149,50 +149,13 @@ Add an `example` to a scheme to prefill the corresponding field:
 For an `http` scheme, the value is sent as is, so the field must contain the complete value, the `Bearer ` prefix included.
 :::
 
-## Generating package sidebars
-
-The theme ships a `generateSideBar` helper that builds a VitePress sidebar automatically from the files of a package, so you don't have to maintain the sidebar entries by hand.
-
-It is a build-time helper (it reads the file system), so it is exposed on a dedicated entry point and used in your `config.js`, **not** in the theme.
-
-List your package names in a `packages.json` file next to your config and generate every package sidebar at once:
-
-```js
-import { defineConfig } from 'vitepress'
-import { generateSideBar } from 'vitepress-theme-kalisio/sidebar'
-import packages from './packages.json'
-
-const sortedPackageSidebar = Object.fromEntries(
-  packages.sort().map(pkg => [`/packages/${pkg}/`, generateSideBar(pkg)])
-)
-
-export default defineConfig({
-  themeConfig: {
-    sidebar: {
-      // ...your own hand-written sections (e.g. '/overview/')
-      ...sortedPackageSidebar
-    }
-  }
-})
-```
-
-For each package, the helper walks `packages/<name>/` and returns a sidebar where:
-
-* a top-level link to the package landing page (`/packages/<name>/index`) is always added first,
-* every `.md` file other than `index.md` becomes a link (its name without the `.md` extension),
-* every sub-folder that contains at least one such file becomes a nested group (empty folders are skipped).
-
-::: tip
-The package folder is resolved relative to the current working directory (`packages/<name>`), so run VitePress from the repository root.
-:::
-
-## Using ready-made components
+## Using built-in components
 
 Here, we offer a comprehensive description of the various components shipped with the theme.
 
 ### HomeFooter
 
-This component renders a footer for the home page.
+This component renders a footer for the home page with the Kalisio sponsor logo and, optionally, trusted organization logos.
 
 Within the `ThemeConfig` section:
 
@@ -202,31 +165,45 @@ trustLogos: [
 ]
 ```
 
-_TODO_
+Each entry supports:
+
+| Property    | Description                          |
+| ----------- | ------------------------------------ |
+| `imageLink` | URL of the trusted organization logo |
+| `link`      | URL opened when clicking the logo    |
+
+When `trustLogos` is defined, a **Trusted by** section is displayed above the **Sponsored by** section.
+
 
 ### Image
 
-This component renders an image that supports the **dark** mode.
+This component renders an image with support for dark mode.
 
 It exposes the following props:
 
-| Name | Description | Default |
-|---|---|---|
-| `src` | the image to be displayed in normal mode | '' |
-| `darkSrc` | the image to be displayed in dark mode | '' |
+| Name      | Description                   | Default |
+| --------- | ----------------------------- | ------- |
+| `src`     | Image displayed in light mode | `''`    |
+| `darkSrc` | Image displayed in dark mode  | `''`    |
 
 > Example
+>
 > ```md
-> <Image src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png" 
-> darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png" />
+> <Image
+>   src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png"
+>   darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
+> />
 > ```
 >
-> <Image src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png" 
-> darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png" />
+> <Image
+> src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png"
+> darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
+> />
+
 
 ### KalisioLogo
 
-This component renders an **Kalisio** logo using the [Image](./usage.md#image) component.
+This component renders the Kalisio logo using the Image component and automatically adapts it to light and dark modes.
 
 > Example
 > ```md
@@ -237,50 +214,155 @@ This component renders an **Kalisio** logo using the [Image](./usage.md#image) c
 
 ### KalisioMaps
 
-This component renders an instance of **Kano** wihtin an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+### KalisioMaps
 
-If you like to get automatically connected, you must provide a token within the `maps` section in the `ThemeConfig`:
+This component renders an instance of **Kano** within an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+
+To automatically authenticate the embedded application, provide a JWT token in the `maps` section of `ThemeConfig`:
 
 ```js
-maps: [
-  jwt: '<TOKEN>'   // the token to get automatically connected
-]
+maps: {
+  jwt: '<TOKEN>'
+}
 ```
 
 > Example
+>
 > ```md
 > <KalisioMaps />
 > ```
 >
 > <KalisioMaps />
+```
 
 ### TemplateAnchor
 
-This component allows to interpolate an `href` according a context that includes:
-* a **domain**: if you like to query an API depending on the flavor
-* a **time**: if you like to query an API at a specific time
-* a **jwt** : if you like to query an API that requires authentication
+This component renders a link whose `href` is interpolated from a context that can include:
+
+* a **domain**, for querying an API depending on the configured flavor;
+* a **time**, for querying an API at a specific time;
+* a **jwt**, for querying an API that requires authentication.
 
 It exposes the following props:
 
-| Name | Description | Default |
-|---|---|---|
-| `text` | text to display | Required |
-| `hrefTemplate` | the url to be interpolated | Required |
-| `domainPath`| the path to extract the **domain** value in the `ThemeConfig` section | `jwt`|
-| `jwtPath`| the path to extract the **jwt** value in the `ThemeConfig` section | `domain`|
+| Name           | Description                                                   | Default  |
+| -------------- | ------------------------------------------------------------- | -------- |
+| `text`         | Text to display                                               | Required |
+| `hrefTemplate` | URL template to interpolate                                   | Required |
+| `domainPath`   | Path used to retrieve the **domain** value from `ThemeConfig` | `domain` |
+| `jwtPath`      | Path used to retrieve the **jwt** value from `ThemeConfig`    | `jwt`    |
 
-And it required to define within the `ThemeConfig` section the required keys:
+The corresponding values must be defined in `ThemeConfig`:
 
 ```js
-  domain: '<DOMAIN>'  // the domain to use when interpolating the url
-  jwt: '<TOKEN>'   // the token to use if authentication is required
+domain: '<DOMAIN>',
+jwt: '<TOKEN>'
 ```
 
 ::: tip TIP
-Set the `domainPath` and `jwtPath` if you declare the keys `domain` and `jwt` in a different section
+Use `domainPath` and `jwtPath` when the domain and jwt values are declared in another section of `ThemeConfig`.
 :::
 
 ### TourLink
 
-_TODO_
+This component renders a link to the application configured in `ThemeConfig`.
+
+It exposes the following props:
+
+| Name     | Description                                            | Default |
+| -------- | ------------------------------------------------------ | ------- |
+| `text`   | Text to display                                        | `''`    |
+| `path`   | Application route appended to the base application URL | `''`    |
+| `params` | Query parameters appended to the URL                   | `{}`    |
+
+The application base URL must be defined in `ThemeConfig`:
+
+```js
+appUrl: 'https://example.com/'
+```
+
+By default, the component adds the `tour=true` query parameter unless a `tour` parameter is explicitly provided.
+
+> Example
+>
+> ```md
+> <AppAnchor
+>   text="Open application"
+>   path="map"
+>   :params="{ project: 'demo' }"
+> />
+> ```
+
+The generated link is opened in a new browser tab.
+
+## Using sidebars helpers
+
+The sidebar helpers automatically generate VitePress sidebars from the documentation directory structure.
+
+### generateSidebar
+
+`generateSidebar` generates the sidebar entries for a single documentation section.
+
+```js
+generateSidebar({
+  rootDir: 'guide',
+  baseUrl: '/guide',
+  capitalize: true
+})
+```
+
+Available options:
+
+| Option       | Description                                             |
+| ------------ | ------------------------------------------------------- |
+| `rootDir`    | Directory containing the Markdown documentation         |
+| `baseUrl`    | Base URL used to generate sidebar links                 |
+| `index`      | Optional entry inserted at the beginning of the sidebar |
+| `exclude`    | Markdown files to exclude. Defaults to `['index.md']`   |
+| `capitalize` | Capitalizes generated sidebar labels                    |
+
+Directories are converted to sidebar groups and Markdown files to sidebar entries.
+
+### generateSidebars
+
+`generateSidebars` generates the complete VitePress sidebar configuration from the direct subdirectories of a root directory.
+
+```js
+sidebar: generateSidebars({
+  rootDir: '.',
+  baseUrl: '',
+  capitalize: true
+})
+```
+
+For example, `guide/` and `about/` directories automatically generate `/guide/` and `/about/` sidebar sections.
+
+### generatePackageSidebar
+
+`generatePackageSidebar` is a convenience helper for package documentation.
+
+```js
+generatePackageSidebar('common-core')
+```
+
+It follows the package conventions:
+
+```text
+packages/<pkg>/
+public/<pkg>-openapi.json
+```
+
+The package index is automatically added as the first sidebar entry. If an OpenAPI specification is available, the `<pkg>-openapi` entry is automatically enriched with the API operations generated by `vitepress-openapi`.
+
+For example:
+
+```js
+sidebar: {
+  '/packages/common-core/': generatePackageSidebar('common-core'),
+  '/packages/common-geospatial/': generatePackageSidebar('common-geospatial')
+}
+```
+
+### OpenAPI integration
+
+`addOpenApiSidebar` can also be used directly to enrich an existing sidebar with operations from an OpenAPI specification.

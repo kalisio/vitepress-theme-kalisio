@@ -1,79 +1,115 @@
 import fs from 'node:fs'
 import path from 'node:path'
+
 import { useSidebar } from 'vitepress-openapi'
 
-
-// Load the package's OpenAPI spec 
-function loadOpenApiSpec (pkg) {
-  const specPath = path.resolve(process.cwd(), `public/${pkg}-openapi.json`)
-  if (!fs.existsSync(specPath)) {
-    return null
-  }
-  return JSON.parse(fs.readFileSync(specPath, 'utf-8'))
-}
-
-export function generateSideBar (pkg) {
-  // Ensure the pkg folder exists
-  const pkgDir = path.resolve(process.cwd(), `packages/${pkg}`)
-  if (!fs.existsSync(pkgDir)) {
-    return []
-  }
-  // Helper function to build the tree
-  function buildTree (dir, basePath = '') {
-    const entries = fs
-      .readdirSync(dir, { withFileTypes: true })
-      .sort((a, b) =>
-        a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+function buildSidebarTree (dir, baseUrl, options = {}) {
+  const { exclude = ['index.md'], capitalize = false } = options
+  const formatText = text =>
+    capitalize ? text.charAt(0).toUpperCase() + text.slice(1) : text
+  const entries = fs
+    .readdirSync(dir, { withFileTypes: true })
+    .sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+    )
+  const items = []
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      const children = buildSidebarTree(
+        fullPath,
+        `${baseUrl}/${entry.name}`,
+        options
       )
-    const items = []
-    for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name)
-      const relativePath = path.join(basePath, entry.name)
-      // Folder case
-      if (entry.isDirectory()) {
-        const children = buildTree(fullPath, relativePath)
-        if (children.length > 0) {
-          items.push({
-            text: entry.name,
-            items: children
-          })
-        }
-      }
-      // File case
-      if (
-        entry.isFile() &&
-        entry.name.endsWith('.md') &&
-        entry.name !== 'index.md'
-      ) {
-        const name = relativePath.replace(/\.md$/, '').replace(/\\/g, '/')
+      if (children.length > 0) {
         items.push({
-          text: entry.name.replace('.md', ''),
-          link: `/packages/${pkg}/${name}`
+          text: formatText(entry.name),
+          items: children
         })
       }
+      continue
     }
-    return items
-  }
-  // Build the sidebar tree
-   const items = [
-    { text: pkg, link: `/packages/${pkg}/index` },
-    ...buildTree(pkgDir)
-  ]
-
-  // Load the OpenAPI spec
-  const spec = loadOpenApiSpec(pkg)
-
-  // No spec case
-  if (!spec) return items
-
-  // Attach the operations tree to the API page link
-  const apiLink = `/packages/${pkg}/${pkg}-openapi`
-  const apiItem = items.find(item => item.link === apiLink)
-  if (apiItem) {
-    
-    apiItem.collapsed = false
-    apiItem.items = useSidebar({ spec }).itemsByPaths({ linkPrefix: `${apiLink}#` })
+    if (!entry.isFile()) continue
+    if (!entry.name.endsWith('.md')) continue
+    if (exclude.includes(entry.name)) continue
+    const name = entry.name.replace(/\.md$/, '')
+    items.push({
+      text: formatText(name),
+      link: `${baseUrl}/${name}`
+    })
   }
   return items
-  
+}
+
+export function generateSidebar (options) {
+  const { rootDir, baseUrl, index, exclude, capitalize } = options
+  const absoluteRootDir = path.resolve(process.cwd(), rootDir)
+  if (!fs.existsSync(absoluteRootDir)) return []
+  const items = []
+  if (index) items.push(index)
+  items.push(
+    ...buildSidebarTree(absoluteRootDir, baseUrl, {
+      exclude,
+      capitalize
+    })
+  )
+  return items
+}
+
+export function generateSidebars (options = {}) {
+  const { rootDir = '.', baseUrl = '', capitalize = false } = options
+  const absoluteRootDir = path.resolve(process.cwd(), rootDir)
+  if (!fs.existsSync(absoluteRootDir)) return {}
+  const entries = fs
+    .readdirSync(absoluteRootDir, { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+    )
+  const sidebars = {}
+  for (const entry of entries) {
+    const route = `${baseUrl}/${entry.name}`.replace(/\/+/g, '/')
+    sidebars[`${route}/`] = generateSidebar({
+      rootDir: path.join(rootDir, entry.name),
+      baseUrl: route,
+      capitalize
+    })
+  }
+  return sidebars
+}
+
+export function addOpenApiSidebar (items, options) {
+  const { specPath, pageLink } = options
+  const absoluteSpecPath = path.resolve(process.cwd(), specPath)
+  if (!fs.existsSync(absoluteSpecPath)) {
+    return items
+  }
+  const spec = JSON.parse(
+    fs.readFileSync(absoluteSpecPath, 'utf-8')
+  )
+  const apiItem = items.find(item => item.link === pageLink)
+  if (!apiItem) {
+    return items
+  }
+  apiItem.collapsed = false
+  apiItem.items = useSidebar({ spec }).itemsByPaths({
+    linkPrefix: `${pageLink}#`
+  })
+  return items
+}
+
+export function generatePackageSidebar (pkg) {
+  const baseUrl = `/packages/${pkg}`
+  const items = generateSidebar({
+    rootDir: `packages/${pkg}`,
+    baseUrl,
+    index: {
+      text: pkg,
+      link: `${baseUrl}/index`
+    }
+  })
+  return addOpenApiSidebar(items, {
+    specPath: `public/${pkg}-openapi.json`,
+    pageLink: `${baseUrl}/${pkg}-openapi`
+  })
 }

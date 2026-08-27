@@ -17,7 +17,6 @@
 <script setup>
 import { computed } from 'vue'
 import { useData } from 'vitepress'
-import _ from 'lodash'
 
 // Data
 const { theme, isDark } = useData()
@@ -28,13 +27,14 @@ const computedLogo = computed(() => {
   return 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png'
 })
 const hasTrustLogo = computed(() => {
-  if (_.has(theme.value, 'trustLogos')) return true
+  if (theme.value?.trustLogos) return true
   return false
 })
 const trustLogos = computed(() => {
   return theme.value.trustLogos
 })
 </script>
+
 <style>
   .title-footer {
     text-align: center;

@@ -1,33 +1,22 @@
 import { defineConfig } from 'vitepress'
+import { generateSidebars } from '@kalisio/vitepress-theme/sidebar'
 
 export default defineConfig({
   base: '/vitepress-theme-kalisio/',
-  title: " ",
-  description: "Kalisio Vitepress Theme",
+  title: ' ',
+  description: 'Kalisio Vitepress Theme',
   lastUpdated: true,
   head: [
-    [ 'link', { rel: "icon", type: "image/png", href: "https://kalisio.github.io/kalisioscope/kalisio/kalisio-icon-light-128x128.png" }],
-    [ 'link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons', type: 'text/css' } ]
+    ['link', { rel: 'icon', type: 'image/png', href: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-icon-light-128x128.png' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons', type: 'text/css' }]
   ],
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png',
     nav: [
-      { text: 'Guide', link: 'guide/installation.md' },
-      { text: 'About', link: 'about/motivation.md' }
+      { text: 'Guide', link: '/guide/installation' },
+      { text: 'About', link: '/about/motivation' }
     ],
-    sidebar: {
-      '/guide/': [
-        { text: 'Installation', link: '/guide/installation' },
-        { text: 'Usage', link: '/guide/usage' }
-      ],
-      '/about/': [
-        { text: 'Motivation', link: '/about/motivation' },
-        { text: 'Contributing', link: '/about/contributing' },
-        { text: 'License', link: '/about/license' },
-        { text: 'Contact', link: '/about/contact' }
-      ]
-    },
+    sidebar: generateSidebars({ rootDir: '.', baseUrl: '', capitalize: true }),
     footer: {
       copyright: 'Copyright © 2017-20xx - KALISIO'
     },
@@ -39,7 +28,7 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/kalisio' },
       { icon: 'linkedin', link: 'https://www.linkedin.com/company/kalisio/?originalSubdomain=fr' },
       { icon: 'twitter', link: 'https://twitter.com/Kalisio3' },
-      { icon: 'youtube', link: 'https://www.youtube.com/channel/UCovN722Sgw61M6uk-73vwQw' },
+      { icon: 'youtube', link: 'https://www.youtube.com/channel/UCovN722Sgw61M6uk-73vwQw' }
     ],
     useReferrer: false,
     useKeycloak: false,
@@ -52,12 +41,12 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['keycloak-js', 'lodash'],
+      include: ['keycloak-js', 'lodash']
     },
     build: {
       commonjsOptions: {
         include: [/node_modules/]
-      },
+      }
     },
     ssr: {
       noExternal: ['vitepress-theme-kalisio']
