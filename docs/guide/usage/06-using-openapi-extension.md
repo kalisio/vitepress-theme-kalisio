@@ -6,7 +6,7 @@ title: Using OpenAPI extension
 
 The theme integrates [vitepress-openapi](https://vitepress-openapi.vercel.app/) to render API reference pages from an **OpenAPI** specification. Its components (`OASpec`, `OAOperation`, `OAIntroduction`, ...) are registered globally and its styles are imported by the theme.
 
-`vitepress-openapi` is declared as an **optional peer dependency**, so you must install it in your project to use these components (see [Installation](./installation.md#installing-the-theme)):
+`vitepress-openapi` is declared as an **optional peer dependency**, so you must install it in your project to use these components (see [Installation](../installation.md#installing-the-theme)):
 
 ```bash
 pnpm add -D vitepress-openapi

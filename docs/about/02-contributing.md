@@ -4,8 +4,6 @@ title: Contributing
 
 # Contributing
 
-If you are a developer you can help us build a better Kalisio Crisis !
-
 ## Submission guidelines
 
 ### Report a bug

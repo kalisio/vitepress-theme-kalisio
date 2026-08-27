@@ -6,7 +6,7 @@ title: Using sidebar helpers
 
 The sidebar helpers automatically generate VitePress sidebars from the documentation directory structure.
 
-Markdown entries use the `title` defined in their frontmatter. When no title is available, the file name is used as a fallback.
+Markdown entries use the `title` defined in their front-matter. When no title is available, the file name is used as a fallback.
 
 Directory names are converted to readable sidebar group titles by replacing `-` and `_` characters with spaces and capitalizing each word.
 

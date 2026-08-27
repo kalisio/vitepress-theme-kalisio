@@ -6,75 +6,55 @@ title: Installation
 
 ## Installing the theme
 
-To install the theme using the master branch:
+Install the theme with:
 
 ```bash
-pnpm add -D https://github.com/kalisio/vitepress-theme-kalisio
+pnpm add -D @kalisio/vitepress-theme
 ```
 
-To install the theme using a specific branch:
+You also need to install the required peer dependencies:
 
-```bash
-pnpm add -D https://github.com/kalisio/vitepress-theme-kalisio#<branch>
-```
-
-You also need to install the required dev dependencies:
-
-| Dependency | Version |
-|---|---|
-| **keycloak-js** | ^23.0.5 |
-| **lodash** | ^4.17.21 |
-| **moment** | ^2.30.1 |
-| **quasar** | ^2.14.3 |
-| **vitepress** | ^1.3.0 |
+| Dependency    | Version   |
+| ------------- | --------- |
+| **quasar**    | `~2.14.3` |
+| **vitepress** | `~1.6.0`  |
+| **vue**       | `~3.5.0`  |
 
 ::: tip
-[OpenAPI](./usage.md#using-openapi-extension) support is provided through [vitepress-openapi](https://vitepress-openapi.vercel.app/), declared as an **optional peer dependency**. If your site uses the OpenAPI components, you must install `vitepress-openapi` (`^0.2.0`) yourself:
+You can also declare all required dependencies directly in your `package.json`:
 
-```bash
-pnpm add -D vitepress-openapi
-```
-:::
-
-::: tip
-You can also copy the following `devDependencies` in your `package.json` and install them:
 ```json
 "devDependencies": {
-  "keycloak-js": "^23.0.5",
-  "lodash": "^4.17.21",
-  "moment": "^2.30.1",
-  "quasar": "^2.14.3",
-  "vitepress": "^1.3.0",
-  "vitepress-openapi": "^0.2.0",
-  "vitepress-theme-kalisio": "https://github.com/kalisio/vitepress-theme-kalisio"
+  "@kalisio/vitepress-theme": "~2.0.0",
+  "quasar": "~2.14.3",
+  "vitepress": "~1.6.0",
+  "vue": "~3.5.0"
 }
+```
+
+Then install them with:
+
+```bash
+pnpm install
 ```
 :::
 
 ## Enabling the theme
 
-To enable the theme, import and re-export it from the custom theme entry:
+To enable the theme, import and re-export it from the custom VitePress theme entry:
 
 ```js
 // .vitepress/theme/index.js
-import Theme from 'vitepress-theme-kalisio'
+import Theme from '@kalisio/vitepress-theme'
 export default Theme
 ```
 
-And provide some specific configuration to allow the build. Add the following **vite** configuration:
+Add the following Vite configuration to ensure the theme is correctly processed during SSR:
 
 ```js
 vite: {
-  optimizeDeps: {
-    include: ['keycloak-js', 'lodash'],
-  },
-  build: {
-    commonjsOptions: {
-      include: [/node_modules/]
-    },
-  },
   ssr: {
-    noExternal: ['vitepress-theme-kalisio'],
+    noExternal: ['@kalisio/vitepress-theme']
   }
 }
 ```
