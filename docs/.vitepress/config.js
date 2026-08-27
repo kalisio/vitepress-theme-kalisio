@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import { generateSidebars } from '@kalisio/vitepress-theme/sidebar'
+import { generateSidebars } from '../../src/sidebar.mjs'
 
 export default defineConfig({
   base: '/vitepress-theme-kalisio/',
