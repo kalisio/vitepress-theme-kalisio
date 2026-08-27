@@ -12,6 +12,6 @@ This theme was initially developed to meet our internal needs and unify the docu
 >
 > By harnessing the power of real-time data and advanced analytics, we provide cutting-edge tools for efficient monitoring and operational support in diverse fields, enhancing decision-making and operational efficiency.
 
-<div class="q-pa-lg column full-width items-center">
+<div style="width: 256px; margin: 0 auto;">
   <KalisioLogo />
 </div>
