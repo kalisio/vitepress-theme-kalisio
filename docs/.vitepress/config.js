@@ -3,7 +3,7 @@ import { generateSidebars } from '../../src/sidebar.js'
 
 export default defineConfig({
   base: '/vitepress-theme-kalisio/',
-  title: ' ',
+  title: '@kalisio/vitepress-theme',
   description: 'Kalisio Vitepress Theme',
   lastUpdated: true,
   head: [
@@ -11,6 +11,7 @@ export default defineConfig({
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons', type: 'text/css' }]
   ],
   themeConfig: {
+    siteTitle: false,
     logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png',
     nav: [
       { text: 'Guide', link: '/guide/installation' },
