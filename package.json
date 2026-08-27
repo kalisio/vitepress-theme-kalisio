@@ -6,16 +6,16 @@
   "packageManager": "pnpm@10.32.0",
   "exports": {
     ".": {
-      "development": "./dist/index.mjs",
+      "development": "./index.js",
       "import": "./dist/index.mjs"
     },
-    "./sidebar": "./src/sidebar.mjs",
+    "./sidebar": {
+      "development": "./src/sidebar.js",
+      "import": "./dist/sidebar.mjs"
+    },
     "./style.css": "./dist/style.css"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist", "src", "index.js"],
   "lint-staged": {
     "**/*.js": [
       "pnpm lint"
@@ -94,10 +94,8 @@
   "publishConfig": {
     "access": "public",
     "exports": {
-      ".": {
-        "import": "./dist/index.mjs"
-      },
-      "./sidebar": "./src/sidebar.mjs",
+      ".": "./dist/index.mjs",
+      "./sidebar": "./dist/sidebar.mjs",
       "./style.css": "./dist/style.css"
     }
   }
