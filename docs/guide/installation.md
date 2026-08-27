@@ -48,13 +48,3 @@ To enable the theme, import and re-export it from the custom VitePress theme ent
 import Theme from '@kalisio/vitepress-theme'
 export default Theme
 ```
-
-Add the following Vite configuration to ensure the theme is correctly processed during SSR:
-
-```js
-vite: {
-  ssr: {
-    noExternal: ['@kalisio/vitepress-theme']
-  }
-}
-```

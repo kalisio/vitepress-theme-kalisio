@@ -42,18 +42,5 @@ export default defineConfig({
       clientId: process.env.KEYCLOAK_SECRET_ID,
       fallbackUrl: 'https://kalisio.com'
     }
-  },
-  vite: {
-    optimizeDeps: {
-      include: ['keycloak-js', 'lodash-es']
-    },
-    build: {
-      commonjsOptions: {
-        include: [/node_modules/]
-      }
-    },
-    ssr: {
-      noExternal: ['@kalisio/vitepress-theme']
-    }
   }
 })
