@@ -39,31 +39,32 @@ It exposes the following props:
 | `src`     | Image displayed in light mode | `''`    |
 | `darkSrc` | Image displayed in dark mode  | `''`    |
 
-> Example
+```md
+<Image
+  src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png"
+  darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
+/>
+```
 >
-> ```md
-> <Image
->   src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png"
->   darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
-> />
-> ```
->
-> <Image
-> src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png"
-> darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
-> />
-
+<Image
+ src="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png"
+ darkSrc="https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-dark-x256.png"
+/>
 
 ## KalisioLogo
 
 This component renders the Kalisio logo using the Image component and automatically adapts it to light and dark modes.
 
-> Example
-> ```md
-> <KalisioLogo />
-> ```
->
-> <KalisioLogo />
+
+ ```md
+<div style="width: 256px;">
+  <KalisioLogo  />
+</div>
+ ```
+
+<div style="width: 256px;">
+<KalisioLogo  />
+</div>
 
 ## KalisioMaps
 
@@ -78,14 +79,10 @@ maps: {
 ```
 
 ```md
-> Example
->
-> ```md
-> <KalisioMaps />
-> ```
->
-> <KalisioMaps />
+<KalisioMaps />
 ```
+
+<KalisioMaps />
 
 ## TemplateAnchor
 
@@ -135,15 +132,13 @@ appUrl: 'https://example.com/'
 
 By default, the component adds the `tour=true` query parameter unless a `tour` parameter is explicitly provided.
 
-> Example
->
-> ```md
-> <AppAnchor
->   text="Open application"
->   path="map"
->   :params="{ project: 'demo' }"
-> />
-> ```
+```md
+<TourLink
+   text="Open application"
+  path="map"
+   :params="{ project: 'demo' }"
+/>
+```
 
 The generated link is opened in a new browser tab.
 
