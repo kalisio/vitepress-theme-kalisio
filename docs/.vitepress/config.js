@@ -14,7 +14,7 @@ export default defineConfig({
     siteTitle: false,
     logo: 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png',
     nav: [
-      { text: 'Guide', link: '/guide/installation' },
+      { text: 'Guide', link: '/guide/getting-started' },
       { text: 'About', link: '/about/01-motivation' }
     ],
     sidebar: generateSidebars({
