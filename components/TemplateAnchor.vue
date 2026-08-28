@@ -41,12 +41,12 @@ onMounted(async () => {
   // Intentional dynamic import: _.template compiles via Function() and
   // depends on theme.value (runtime domain/jwt) → must stay client-side,
   // out of SSR/build. Do NOT switch back to a static import.
-  const { template } = await import('lodash-es')
+  const { template, get } = await import('lodash-es')
   const moment = await import('moment')
   const compiler = template(props.hrefTemplate)
   const context = { moment }
-  context.domain = theme.value[props.domainPath]
-  context.jwt = theme.value[props.jwtPath]
+  context.domain = get(theme.value, props.domainPath)
+  context.jwt = get(theme.value, props.jwtPath)
   href.value = compiler(context)
 })
 </script>

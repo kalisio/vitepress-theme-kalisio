@@ -27,8 +27,7 @@ const computedLogo = computed(() => {
   return 'https://kalisio.github.io/kalisioscope/kalisio/kalisio-logo-light-x256.png'
 })
 const hasTrustLogo = computed(() => {
-  if (theme.value?.trustLogos) return true
-  return false
+  return !!theme.value?.trustLogos?.length
 })
 const trustLogos = computed(() => {
   return theme.value.trustLogos

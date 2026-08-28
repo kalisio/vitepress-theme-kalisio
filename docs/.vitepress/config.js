@@ -18,8 +18,7 @@ export default defineConfig({
       { text: 'About', link: '/about/01-motivation' }
     ],
     sidebar: generateSidebars({
-      configUrl: import.meta.url,
-      capitalize: true
+      configUrl: import.meta.url
     }),
     footer: {
       copyright: 'Copyright © 2017-20xx - KALISIO'
@@ -41,6 +40,9 @@ export default defineConfig({
       realm: process.env.KEYCLOAK_REALM,
       clientId: process.env.KEYCLOAK_SECRET_ID,
       fallbackUrl: 'https://kalisio.com'
+    },
+    maps: {
+      url: 'https://kano.dev.kalisio.xyz'
     }
   }
 })

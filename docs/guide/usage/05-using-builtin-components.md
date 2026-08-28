@@ -8,36 +8,69 @@ Here, we offer a comprehensive description of the various components shipped wit
 
 ## HomeFooter
 
-This component renders a footer for the home page with the Kalisio sponsor logo and, optionally, trusted organization logos.
+### Description
 
-Within the `ThemeConfig` section:
+This component renders the footer displayed on the home page.
+
+It always displays the **Kalisio** sponsor logo and can optionally display trusted organization logos.
+
+Trusted organizations are configured in `ThemeConfig`:
 
 ```js
 trustLogos: [
-  { imageLink: '', link: '' }
+  {
+    imageLink: 'https://example.com/logo.png',
+    link: 'https://example.com'
+  }
 ]
 ```
 
 Each entry supports:
 
-| Property    | Description                          |
-| ----------- | ------------------------------------ |
+| Name | Description |
+| --- | --- |
 | `imageLink` | URL of the trusted organization logo |
-| `link`      | URL opened when clicking the logo    |
+| `link` | URL opened when clicking the logo |
 
-When `trustLogos` is defined, a **Trusted by** section is displayed above the **Sponsored by** section.
+When `trustLogos` is defined and contains at least one entry, a **Trusted by** section is displayed above the **Sponsored by** section.
 
+::: info
+The Kalisio logo automatically adapts to light and dark modes.
+:::
+
+### Example
+
+Within `ThemeConfig`:
+
+```js
+trustLogos: [
+  {
+    imageLink: 'https://example.com/logo.png',
+    link: 'https://example.com'
+  }
+]
+```
+
+Then use the component in a Markdown page:
+
+```md
+<HomeFooter />
+```
 
 ## Image
 
+### Description
+
 This component renders an image with support for dark mode.
 
-It exposes the following props:
+### Props
 
 | Name      | Description                   | Default |
 | --------- | ----------------------------- | ------- |
 | `src`     | Image displayed in light mode | `''`    |
 | `darkSrc` | Image displayed in dark mode  | `''`    |
+
+### Example
 
 ```md
 <Image
@@ -53,8 +86,11 @@ It exposes the following props:
 
 ## KalisioLogo
 
+### Description
+
 This component renders the Kalisio logo using the Image component and automatically adapts it to light and dark modes.
 
+### Example
 
  ```md
 <div style="width: 256px;">
@@ -63,10 +99,12 @@ This component renders the Kalisio logo using the Image component and automatica
  ```
 
 <div style="width: 256px;">
-<KalisioLogo  />
+  <KalisioLogo  />
 </div>
 
 ## KalisioMaps
+
+### Description
 
 This component renders an instance of **Kano** within an [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
 
@@ -78,6 +116,8 @@ maps: {
 }
 ```
 
+### Example
+
 ```md
 <KalisioMaps />
 ```
@@ -86,13 +126,15 @@ maps: {
 
 ## TemplateAnchor
 
+### Description
+
 This component renders a link whose `href` is interpolated from a context that can include:
 
 * a **domain**, for querying an API depending on the configured flavor;
 * a **time**, for querying an API at a specific time;
 * a **jwt**, for querying an API that requires authentication.
 
-It exposes the following props:
+### Props
 
 | Name           | Description                                                   | Default  |
 | -------------- | ------------------------------------------------------------- | -------- |
@@ -112,11 +154,29 @@ jwt: '<TOKEN>'
 Use `domainPath` and `jwtPath` when the domain and jwt values are declared in another section of `ThemeConfig`.
 :::
 
+### Example
+
+```md
+<TemplateAnchor
+  text="Open Kano"
+  href-template="<%= domain %>"
+  domain-path="maps.url"
+/>
+```
+
+<TemplateAnchor
+  text="Open Kano"
+  href-template="<%= domain %>"
+  domain-path="maps.url"
+/>
+
 ## TourLink
+
+### Description
 
 This component renders a link to the application configured in `ThemeConfig`.
 
-It exposes the following props:
+### Props
 
 | Name     | Description                                            | Default |
 | -------- | ------------------------------------------------------ | ------- |
@@ -132,10 +192,12 @@ appUrl: 'https://example.com/'
 
 By default, the component adds the `tour=true` query parameter unless a `tour` parameter is explicitly provided.
 
+### Example
+
 ```md
 <TourLink
    text="Open application"
-  path="map"
+   path="map"
    :params="{ project: 'demo' }"
 />
 ```
