@@ -2,7 +2,7 @@
 title: Using Keycloak authentication
 ---
 
-## Using Keycloak authentication
+# Using Keycloak authentication
 
 To enforce user authentication with **Keycloak**, all you need to do is to declare the following properties in the `ThemeConfig` object:
 
