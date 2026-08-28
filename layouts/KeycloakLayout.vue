@@ -6,16 +6,22 @@
 
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { useData } from 'vitepress'
-import { ref, onMounted } from 'vue'
+import { useData, inBrowser } from 'vitepress'
+import { ref, watch, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
 import Keycloak from 'keycloak-js'
+import { defaultMessages } from '../defaults.js'
 
 // Data
-const { theme } = useData()
+const { theme, lang, isDark } = useData()
 const { Layout } = DefaultTheme
 const $q = useQuasar()
-const hasAccess = ref(true)
+// Enabled access gates
+const useReferrer = theme.value.useReferrer === true || theme.value.useReferrer === 'true'
+const useKeycloak = theme.value.useKeycloak === true || theme.value.useKeycloak === 'true'
+const gated = useReferrer || useKeycloak
+// Deny by default when gated
+const hasAccess = ref(!gated)
 
 // Functions
 function passReferrer () {
@@ -43,21 +49,27 @@ async function passKeycloak () {
   return userRoles.some(role => acceptedRoles.includes(role))
 }
 
+// Watch
+watch(isDark, (value) => {
+  if (inBrowser) $q.dark.set(value)
+}, { immediate: true })
+
 // Hooks
 onMounted(async () => {
-  const useReferrer = theme.value.useReferrer === true || theme.value.useReferrer === 'true'
-  const useKeycloak = theme.value.useKeycloak === true || theme.value.useKeycloak === 'true'
-  if (useReferrer || useKeycloak) {
-    if (useReferrer) hasAccess.value = passReferrer()
-    if (!hasAccess.value && useKeycloak) hasAccess.value = await passKeycloak()
-    if (!hasAccess.value) {
-      $q.dialog({
-        title: 'Accès refusé',
-        message: 'Vous n\'êtes pas autorisé à acceder à ce site'
-      }).onOk(() => {
-        window.location.href = theme.value.keycloak.fallbackUrl
-      })
-    }
+  if (!gated) return
+  let granted = false
+  if (useReferrer) granted = passReferrer()
+  if (!granted && useKeycloak) granted = await passKeycloak()
+  hasAccess.value = granted
+  if (!granted) {
+    // Theme override wins, otherwise fall back to the built-in copy for the
+    // active language, and finally to English
+    const primaryLang = lang.value.split('-')[0]
+    const { accessDenied } = defaultMessages[primaryLang] ?? defaultMessages.en
+    const { title, message } = theme.value?.messages?.accessDenied ?? accessDenied
+    $q.dialog({ title, message }).onOk(() => {
+      window.location.href = theme.value.keycloak.fallbackUrl
+    })
   }
 })
 </script>
