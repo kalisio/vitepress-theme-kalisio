@@ -4,7 +4,7 @@ title: Getting started
 
 # Getting started
 
-## Installation
+## Installing the theme
 
 Install the theme with your package manager of choice:
 
@@ -47,7 +47,7 @@ You can also declare all required dependencies directly in your `package.json`:
 Then install them with `pnpm install`.
 :::
 
-## Configuration
+## Configuring the theme
 
 ### Enabling the theme
 
