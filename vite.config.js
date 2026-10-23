@@ -22,7 +22,9 @@ export default defineConfig({
         sidebar: 'src/sidebar.js'
       },
       formats: ['es'],
-      fileName: (format, entryName) => `${entryName}.mjs`
+      fileName: (format, entryName) => `${entryName}.mjs`,
+      // Vite >= 6 names the CSS after the package, keep the published ./style.css path
+      cssFileName: 'style'
     },
     rollupOptions: {
       external: [

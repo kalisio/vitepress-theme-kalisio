@@ -18,13 +18,8 @@
   },
   "devDependencies": {
     "@kalisio/vitepress-theme": "link:..",
-    "quasar": "~2.14.3",
-    "vitepress": "~1.6.0",
-    "vue": "~3.5.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
+    "quasar": "catalog:",
+    "vitepress": "catalog:",
+    "vue": "catalog:"
   }
 }
