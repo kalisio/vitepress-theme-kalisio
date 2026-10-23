@@ -15,12 +15,21 @@ catalogs:
     husky:
       specifier: 9.1.7
       version: 9.1.7
+    keycloak-js:
+      specifier: 23.0.4
+      version: 23.0.4
     knip:
       specifier: 6.7.0
       version: 6.7.0
     lint-staged:
       specifier: 16.4.0
       version: 16.4.0
+    lodash-es:
+      specifier: 4.18.1
+      version: 4.18.1
+    moment:
+      specifier: 2.30.1
+      version: 2.30.1
     publint:
       specifier: 0.3.20
       version: 0.3.20
@@ -39,6 +48,9 @@ catalogs:
     vitepress:
       specifier: 1.6.3
       version: 1.6.3
+    vitepress-openapi:
+      specifier: 0.2.1
+      version: 0.2.1
     vue:
       specifier: 3.5.30
       version: 3.5.30
@@ -61,16 +73,16 @@ importers:
   .:
     dependencies:
       keycloak-js:
-        specifier: ^23.0.5
-        version: 23.0.7
+        specifier: 'catalog:'
+        version: 23.0.4
       lodash-es:
-        specifier: ~4.18.1
+        specifier: 'catalog:'
         version: 4.18.1
       moment:
-        specifier: ^2.30.1
+        specifier: 'catalog:'
         version: 2.30.1
       vitepress-openapi:
-        specifier: ~0.2.0
+        specifier: 'catalog:'
         version: 0.2.1(vitepress@1.6.3(@algolia/client-search@5.55.0)(jwt-decode@4.0.0)(lightningcss@1.32.0)(postcss@8.5.18)(search-insights@2.17.3))(vue@3.5.30)
     devDependencies:
       '@changesets/cli':
@@ -2164,8 +2176,8 @@ packages:
     resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
     engines: {node: '>=18'}
 
-  keycloak-js@23.0.7:
-    resolution: {integrity: sha512-OmszsKzBhhm5yP4W1q/tMd+nNnKpOAdeVYcoGhphlv8Fj1bNk4wRTYzp7pn5BkvueLz7fhvKHz7uOc33524YrA==}
+  keycloak-js@23.0.4:
+    resolution: {integrity: sha512-Dq0X/8Gap9As3eAaeNRlQldxdBjMeKh2Q81QwykwihLAcG9hSZHuwFioldDmNbdzymguNMZpqfr3mK9hv+G8hA==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -5256,7 +5268,7 @@ snapshots:
 
   jwt-decode@4.0.0: {}
 
-  keycloak-js@23.0.7:
+  keycloak-js@23.0.4:
     dependencies:
       base64-js: 1.5.1
       js-sha256: 0.10.1
