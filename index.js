@@ -13,14 +13,20 @@ import './css/custom.css'
 
 export default {
   extends: DefaultTheme,
+
   Layout: KeycloakLayout,
-  enhanceApp ({ app }) {
+
+  enhanceApp ({ app, siteData }) {
     // Use Quasar framework
     app.use(Quasar, { plugins: { Dialog } }, { req: { headers: {} } })
+
     // Usage of vitepress-openapi components
     openApiTheme.enhanceApp({ app })
-    // Enable the custom server option for API
-    useTheme({ server: { allowCustomServer: true } })
+    const openapiOptions = siteData.value.themeConfig?.openapi ?? {}
+    useTheme({
+      ...openapiOptions
+    })
+
     // Dynamic registration of all components
     app.component('HomeFooter', HomeFooter)
     app.component('Image', Image)
