@@ -1,5 +1,7 @@
 # @kalisio/vitepress-theme
 
+## [v2.2.1](https://github.com/kalisio/vitepress-theme-kalisio/milestone/7?closed=1)
+
 ## [v2.2.0](https://github.com/kalisio/vitepress-theme-kalisio/milestone/5?closed=1)
 
 ## [v2.1.0](https://github.com/kalisio/vitepress-theme-kalisio/milestone/4?closed=1)
