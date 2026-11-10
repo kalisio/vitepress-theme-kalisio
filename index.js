@@ -1,3 +1,4 @@
+import 'quasar/dist/quasar.css'
 import DefaultTheme from 'vitepress/theme'
 import { Quasar, Dialog } from 'quasar'
 import { theme as openApiTheme, useTheme } from 'vitepress-openapi/client'
@@ -9,7 +10,6 @@ import KalisioMaps from './components/KalisioMaps.vue'
 import TemplateAnchor from './components/TemplateAnchor.vue'
 import TourLink from './components/TourLink.vue'
 import 'vitepress-openapi/dist/style.css'
-import './css/custom.css'
 
 export default {
   extends: DefaultTheme,
