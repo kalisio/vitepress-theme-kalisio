@@ -10,6 +10,7 @@ import KalisioMaps from './components/KalisioMaps.vue'
 import TemplateAnchor from './components/TemplateAnchor.vue'
 import TourLink from './components/TourLink.vue'
 import 'vitepress-openapi/dist/style.css'
+import './styles/overrides.css'
 
 export default {
   extends: DefaultTheme,

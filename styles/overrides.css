@@ -1,0 +1,8 @@
+/* Quasar's .flex also sets flex-wrap: wrap, which breaks Tailwind column containers
+   such as the vitepress-openapi playground (the column widens as a long value is typed).
+   Quasar components use .column instead of .flex-col, so they are not affected.
+   see: https://github.com/kalisio/vitepress-theme-kalisio/issues/27
+*/
+.vp-doc .flex.flex-col:not(.flex-wrap, .flex-wrap-reverse) {
+  flex-wrap: nowrap;
+}
