@@ -1,5 +1,5 @@
 # meta-workspace version: 0.11.0
-# meta-workspace synced at: 2026-11-10T15:04:50.438Z
+# meta-workspace synced at: 2026-11-11T12:57:49.820Z
 
 catalog:
   '@automerge/automerge-repo': 2.4.0
@@ -53,7 +53,7 @@ catalog:
   '@kalisio/kdk-core-common': 0.2.0
   '@kalisio/kdk-map-api': 0.2.0
   '@kalisio/kdk-map-common': 0.2.0
-  '@kalisio/vitepress-theme': 2.1.0
+  '@kalisio/vitepress-theme': 2.2.1
   '@logtape/logtape': 0.7.0
   '@mapbox/mbtiles': 0.12.1
   '@mapbox/sphericalmercator': 2.0.2
@@ -159,7 +159,7 @@ catalog:
   http-proxy-middleware: 4.2.1
   husky: 9.1.7
   is-docker: 2.2.1
-  keycloak-js: 23.0.4
+  keycloak-js: 26.2.5
   knip: 6.7.0
   lcov-result-merger: 6.0.0
   limiter: 1.1.3
